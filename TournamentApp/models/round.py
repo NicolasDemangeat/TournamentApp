@@ -2,7 +2,7 @@
 # coding: utf-8
 
 
-from TournamentApp.models.tournament import Tournament
+from .tournament import Tournament
 import datetime
 
 class Round(Tournament):
