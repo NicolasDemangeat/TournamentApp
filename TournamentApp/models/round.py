@@ -1,10 +1,9 @@
 #! /usr/bin/env python3
 # coding: utf-8
 
-from TournamentApp.models.tournament import Tournament
-import os
-import datetime
 
+from TournamentApp.models.tournament import Tournament
+import datetime
 
 class Round(Tournament):
     '''Class management round'''
@@ -25,6 +24,3 @@ class Round(Tournament):
     def set_end_date(self):
         '''Set the date and time when round is finish'''
         self.end_date = datetime.datetime.now().strftime("%d/%m/%Y, %H:%M:%S")
-
-test = Round()
-print(test.essai())
