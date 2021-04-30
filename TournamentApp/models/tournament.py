@@ -29,6 +29,9 @@ class Tournament:
         #appel vers la BDD pour afficher la iste des indices correspondant aux instances du joueur
         pass
 
+    def essai(self):
+        return 2*2
+
 if __name__ == '__main__':
     tournoi = Tournament('test', 'ici', 4, 'bullet', 'un tournoi')
     print(tournoi.date)

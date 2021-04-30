@@ -1,10 +1,12 @@
 #! /usr/bin/env python3
 # coding: utf-8
 
+from TournamentApp.models.tournament import Tournament
 import os
 import datetime
 
-class Round:
+
+class Round(Tournament):
     '''Class management round'''
 
     round_number = 1
@@ -15,11 +17,14 @@ class Round:
         self.end_date = None
         self.matchs = []
         type(self).round_number += 1
-    
+
     @classmethod
     def reset_round_number(cls):
         cls.round_number = 1
-    
+
     def set_end_date(self):
         '''Set the date and time when round is finish'''
         self.end_date = datetime.datetime.now().strftime("%d/%m/%Y, %H:%M:%S")
+
+test = Round()
+print(test.essai())
