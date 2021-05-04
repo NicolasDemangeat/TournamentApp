@@ -1,9 +1,10 @@
 #! /usr/bin/env python3
 # coding: utf-8
 
+from TournamentApp.models.managementbdd import ManagementBdd
 import datetime
 
-class Tournament:
+class Tournament(ManagementBdd):
     '''Class management tournament'''
 
     def __init__(self, name, place, nb_rounds, time_control, description):
@@ -12,11 +13,7 @@ class Tournament:
         self.nb_rounds = nb_rounds
         self.time_control = time_control
         self.description = description
-
-    @property
-    def date(self):
-        now = datetime.datetime.now()
-        return now.strftime("%d/%m/%Y")
+        self.date = datetime.datetime.now().strftime("%d/%m/%Y")
 
     @property
     def get_rounds(self):

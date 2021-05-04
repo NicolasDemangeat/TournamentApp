@@ -1,11 +1,14 @@
 #! /usr/bin/env python3
 # coding: utf-8
 
-
-from .tournament import Tournament
+import os
+import sys
+BASE_DIR = os.getcwd()
+sys.path.append(BASE_DIR)
+from TournamentApp.models.tournament import Tournament
 import datetime
 
-class Round(Tournament):
+class Round:
     '''Class management round'''
 
     round_number = 1
