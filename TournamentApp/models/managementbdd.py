@@ -3,12 +3,12 @@
 
 from tinydb import TinyDB
 
-class ManagementBdd:
+class ManagementTournoi:
 
-    def save_into_db(self, table):
+    def save_into_db(self, tournoi, table):
         '''Serialize infos and save into DB'''
 
-        serialized_infos = self.__dict__
+        serialized_infos = vars(tournoi)
         db = TinyDB('db.json')
         table = db.table(table)
         table.insert(serialized_infos)

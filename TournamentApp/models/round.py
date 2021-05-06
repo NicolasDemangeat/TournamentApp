@@ -5,7 +5,6 @@ import os
 import sys
 BASE_DIR = os.getcwd()
 sys.path.append(BASE_DIR)
-from TournamentApp.models.tournament import Tournament
 import datetime
 
 class Round:
@@ -27,3 +26,6 @@ class Round:
     def set_end_date(self):
         '''Set the date and time when round is finish'''
         self.end_date = datetime.datetime.now().strftime("%d/%m/%Y, %H:%M:%S")
+
+    def add_match(self, match):
+        self.matchs.append(match)
