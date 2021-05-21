@@ -39,15 +39,16 @@ class Tournament:
     def set_first_round(self):
         '''Methode to create the first round'''
         self.all_possible_pairs = set(itertools.combinations(self.players, 2))
+        self.match_already_done = set()
+
         players_sorted_by_rank = sorted(self.players, key=lambda x: x.ranking)
         first_half = players_sorted_by_rank[:len(players_sorted_by_rank)//2]
         second_half = players_sorted_by_rank[len(players_sorted_by_rank)//2:]
-        round1 = Round()
-        self.match_already_done = set()
+        round1 = Round()        
 
-        for i in range(len(first_half)):
-            round1.add_match(Match(first_half[i], first_half[i].points, second_half[i], second_half[i].points))
-            self.match_already_done.add((first_half[i], second_half[i]))
+        for i, el in enumerate(first_half):
+            round1.add_match(Match(el, el.points, second_half[i], second_half[i].points))
+            self.match_already_done.add((el, second_half[i]))
 
         self.add_rounds(round1)
 
@@ -56,5 +57,17 @@ class Tournament:
         rest_paires = self.all_possible_pairs - self.match_already_done
         players_sorted_by_points = sorted(self.players, key=lambda x: (x.points, x.ranking))
         round_n = Round()
+        
+
         for i in range(0, len(players_sorted_by_points), 2):
             temp = (players_sorted_by_points[i], players_sorted_by_points[i+1])
+            round_n.add_match(Match(players_sorted_by_points[i], 
+            players_sorted_by_points[i].points, 
+            players_sorted_by_points[i+1], 
+            players_sorted_by_points[i+1].points))
+            self.match_already_done.add(temp)
+
+        self.add_rounds(round_n)
+
+
+
