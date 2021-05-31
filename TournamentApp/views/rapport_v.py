@@ -1,13 +1,12 @@
 #! /usr/bin/env python3
 # coding: utf-8
 
-class HomeMenuView:
+class RapportMenuView:
     def __init__(self, menu):
         self.menu = menu
 
     def _display_menu(self):
-        print('Bienvenue')
-        print('Veuillez choisir une option en entrant le chiffre correspondant.')
+        print('Veuillez choisir une option en entrant le chiffre correspondant.')        
         for key, entry in self.menu.items():
             print(f'{key} : {entry.option}')
         print()

@@ -6,7 +6,6 @@ from TournamentApp.models.match import Match
 import datetime
 import itertools
 
-
 class Tournament:
     '''Class management tournament'''
 
@@ -54,10 +53,10 @@ class Tournament:
 
     def set_next_round(self):
         '''Methode to create the n next rounds'''
+        
         rest_paires = self.all_possible_pairs - self.match_already_done
         players_sorted_by_points = sorted(self.players, key=lambda x: (x.points, x.ranking))
-        round_n = Round()
-        
+        round_n = Round()        
 
         for i in range(0, len(players_sorted_by_points), 2):
             temp = (players_sorted_by_points[i], players_sorted_by_points[i+1])
