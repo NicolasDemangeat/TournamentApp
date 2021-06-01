@@ -12,4 +12,4 @@ class Match:
 
     @property
     def get_match(self):
-        return ([self.player_1.first_name, self.points_p1], [self.player_2.first_name, self.points_p2])
+        print(f'{self.player_1.first_name} - {self.player_2.first_name}')

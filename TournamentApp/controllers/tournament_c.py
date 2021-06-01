@@ -11,24 +11,19 @@ class NewTournamentController:
         self.view = TournamentView()
 
     def __call__(self):
-        liste_tournament_sequence = self.view.tournament_sequence()
-        liste_input = [input, input, input, input, input]
-        liste_choice = []
+        liste_choices = self.view.tournament_sequence()
 
-        for sentence, choice in zip(liste_tournament_sequence, liste_input):
-            print(sentence)
-            liste_choice.append(choice('>> '))
+        self.tournoi = Tournament(*liste_choices)
 
-        tournoi = Tournament(*liste_choice)
-
-        liste_players_sequence = self.view.players_sequence()
-        liste_choice = []
         continuer = True
         while continuer:
-            for sentence, choice in zip(liste_players_sequence, liste_input):
-                print(sentence)
-                liste_choice.append(choice('>> '))
-            
-            tournoi.players.append(Player(*liste_choice))
-            liste_choice = []
+            liste_players = self.view.players_sequence()
+            self.tournoi.add_players(Player(*liste_players))            
             continuer = self.view.player_continue()
+
+        self.view.matchs_selection()
+        self.tournoi.set_first_round()
+        for el in self.tournoi.rounds[0].matchs:
+            el.get_match
+
+        
