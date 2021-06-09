@@ -20,6 +20,10 @@ class Tournament:
         self.rounds = []
 
     @property
+    def get_nb_rounds(self):
+        return self.nb_rounds
+
+    @property
     def get_rounds(self):
         #appel vers la BDD pour afficher la liste des instances de round du tournoi
         pass
@@ -28,6 +32,10 @@ class Tournament:
     def get_players(self):
         #appel vers la BDD pour afficher la iste des indices correspondant aux instances du joueur
         pass
+
+    def add_score(self, choices):
+        for player, choice in zip(self.players, choices):
+            player.points += choice
 
     def add_players(self, player):
         self.players.append(player)
@@ -55,7 +63,7 @@ class Tournament:
         '''Methode to create the n next rounds'''
         
         rest_paires = self.all_possible_pairs - self.match_already_done
-        players_sorted_by_points = sorted(self.players, key=lambda x: (x.points, x.ranking))
+        players_sorted_by_points = sorted(self.players, key=lambda x: (x.points, x.ranking), reverse=True)
         round_n = Round()        
 
         for i in range(0, len(players_sorted_by_points), 2):

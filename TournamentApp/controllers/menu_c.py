@@ -1,6 +1,8 @@
 #! /usr/bin/env python3
 # coding: utf-8
 
+from TournamentApp.utils.clear import Clear
+from TournamentApp.views.end_tournament_v import EndTournamentView
 from TournamentApp.controllers.rapport_c import AllActorAlpha, AllActorRank, AllMatchsTournament, AllPalyersAlpha, AllPlayersRank, AllRoundTournament, AllTournaments
 from TournamentApp.views.rapport_v import RapportMenuView
 from TournamentApp.controllers.tournament_c import NewTournamentController
@@ -13,6 +15,7 @@ class HomeMenuController:
         self.view = HomeMenuView(self.menu)
 
     def __call__(self):
+        Clear().screen()
         self.menu.add('auto', 'Créer un tournoi', NewTournamentController())
         self.menu.add('auto', 'Générer des rapports', RapportMenuController())
         self.menu.add('Q', 'Quitter', EndAppController())
@@ -43,3 +46,16 @@ class RapportMenuController:
 class EndAppController:
     def __call__(self):
         return None
+
+class EndTournamentMenuController:
+    def __init__(self):
+        self.menu = Menu()
+        self.view = EndTournamentView(self.menu)
+
+    def __call__(self):
+        self.menu.add('auto', 'Retour au menu principal', HomeMenuController())
+        self.menu.add('auto', 'Quitter l\'application', EndAppController())
+
+        user_choice = self.view.get_user_choice()
+
+        return user_choice.handler

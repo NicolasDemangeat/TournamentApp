@@ -12,4 +12,4 @@ class Match:
 
     @property
     def get_match(self):
-        print(f'{self.player_1.first_name} - {self.player_2.first_name}')
+        return f'[{self.player_1.first_name}] contre [{self.player_2.first_name}]'

@@ -1,6 +1,7 @@
 #! /usr/bin/env python3
 # coding: utf-8
 
+from TournamentApp.utils.clear import Clear
 from TournamentApp.controllers.menu_c import HomeMenuController
 
 class ApplicationController:
