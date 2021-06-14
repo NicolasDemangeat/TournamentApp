@@ -16,13 +16,13 @@ class TournamentView:
 
         for sentence in liste_sentences:
             print(sentence)
-            liste_choices.append(input('>> '))        
+            liste_choices.append(input('>> '))
 
         return liste_choices
 
     def players_sequence(self):
         print('\nCréation des joueurs.')
-        
+
         liste_sentences = [
             '\nVeuillez saisir le prénom du joueur : ',
             '\nVeuillez saisir le nom du joueur : ',
@@ -66,4 +66,4 @@ class TournamentView:
     
     def winner_announcement(self, tournoi):
         for i, player in enumerate(tournoi.players):
-            print(f'Numéro {i+1} du tournoi est [{player.first_name}] avec un score de {player.points}')
+            print(f'Le numéro {i+1} du tournoi est [{player.first_name}] avec un score de {player.points}')

@@ -14,7 +14,7 @@ class Round:
 
     def __init__(self):
         self.name = f'Round {type(self).round_number}'
-        self.start_date = datetime.datetime.now().strftime("Date: %d/%m/%Y \nHeure: %H:%M:%S")
+        self.start_date = datetime.datetime.now().strftime("Date: %d/%m/%Y Heure: %H:%M:%S")
         self.end_date = None
         self.matchs = []
         type(self).round_number += 1

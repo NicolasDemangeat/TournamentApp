@@ -18,7 +18,7 @@ class HomeMenuController:
         Clear().screen()
         self.menu.add('auto', 'Créer un tournoi', NewTournamentController())
         self.menu.add('auto', 'Générer des rapports', RapportMenuController())
-        self.menu.add('Q', 'Quitter', EndAppController())
+        self.menu.add('auto', 'Quitter', EndAppController())
 
         user_choice = self.view.get_user_choice()
 

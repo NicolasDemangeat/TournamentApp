@@ -23,16 +23,6 @@ class Tournament:
     def get_nb_rounds(self):
         return self.nb_rounds
 
-    @property
-    def get_rounds(self):
-        #appel vers la BDD pour afficher la liste des instances de round du tournoi
-        pass
-
-    @property
-    def get_players(self):
-        #appel vers la BDD pour afficher la iste des indices correspondant aux instances du joueur
-        pass
-
     def add_score(self, choices):
         for player, choice in zip(self.players, choices):
             player.points += choice

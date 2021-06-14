@@ -1,5 +1,7 @@
 #! /usr/bin/env python3
 # coding: utf-8
+from TournamentApp.models.managementbdd import ManagementDataBase
+from TournamentApp.models.round import Round
 from TournamentApp.controllers import menu_c
 from TournamentApp.utils.clear import Clear
 from TournamentApp.models.player import Player
@@ -9,6 +11,7 @@ from TournamentApp.views.tournament_v import TournamentView
 class NewTournamentController:
     def __init__(self):
         self.view = TournamentView()
+        self.data_base = ManagementDataBase()
 
     def __call__(self):
         Clear().screen()
@@ -21,7 +24,9 @@ class NewTournamentController:
         continuer = True
         while continuer:
             liste_players = self.view.players_sequence()
-            self.tournoi.add_players(Player(*liste_players))
+            player = Player(*liste_players)
+            self.tournoi.add_players(player)
+            self.data_base.save_players(player)
             continuer = self.view.player_continue()
             Clear().screen()
 
@@ -33,8 +38,11 @@ class NewTournamentController:
             self.view.matchs_selection(self.tournoi, i)
             choices = self.view.set_players_score(self.tournoi)
             self.tournoi.add_score(choices)
-            Clear().screen()        
+            self.tournoi.rounds[i].set_end_date()
+            Clear().screen()
 
+        self.data_base.save_tournament(self.tournoi)
         self.view.winner_announcement(self.tournoi)
+        Round.reset_round_number()
 
         return menu_c.EndTournamentMenuController()
