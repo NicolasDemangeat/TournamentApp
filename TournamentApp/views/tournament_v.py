@@ -58,12 +58,12 @@ class TournamentView:
 
     def set_players_score(self, tournoi):
         choices = []
-        for i, value in enumerate(tournoi.players):
+        for value in tournoi.players:
             print(f'Combien de point pour le joueur {value.first_name} : ')
             choices.append(float(input('>> ')))
         
         return choices
     
     def winner_announcement(self, tournoi):
-        for i, player in enumerate(tournoi.players):
+        for i, player in enumerate(sorted(tournoi.players, key=lambda x: (x.points, x.ranking), reverse=True)):
             print(f'Le numéro {i+1} du tournoi est [{player.first_name}] avec un score de {player.points}')

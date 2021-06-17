@@ -3,7 +3,7 @@
 
 from TournamentApp.utils.clear import Clear
 from TournamentApp.views.end_tournament_v import EndTournamentView
-from TournamentApp.controllers.rapport_c import AllActorAlpha, AllActorRank, AllMatchsTournament, AllPalyersAlpha, AllPlayersRank, AllRoundTournament, AllTournaments
+from TournamentApp.controllers.rapport_c import AllActorAlpha, AllActorRank, AllMatchsTournamentMenu, AllPalyersAlphaMenu, AllPalyersRankMenu, AllRoundTournamentMenu, AllTournaments
 from TournamentApp.views.rapport_v import RapportMenuView
 from TournamentApp.controllers.tournament_c import NewTournamentController
 from TournamentApp.utils.menus import Menu
@@ -32,11 +32,11 @@ class RapportMenuController:
     def __call__(self):
         self.menu.add('auto', 'Liste de tous les acteurs par ordre alphabétique', AllActorAlpha())
         self.menu.add('auto', 'Liste de tous les acteurs par classement', AllActorRank())
-        self.menu.add('auto', 'Liste de tous les joueurs d\'un tournoi par ordre alphabétique', AllPalyersAlpha())
-        self.menu.add('auto', 'Liste de tous les joueurs d\'un tournoi par classement', AllPlayersRank())
+        self.menu.add('auto', 'Liste de tous les joueurs d\'un tournoi par ordre alphabétique', AllPalyersAlphaMenu())
+        self.menu.add('auto', 'Liste de tous les joueurs d\'un tournoi par classement', AllPalyersRankMenu())
         self.menu.add('auto', 'Liste de tous les tournois', AllTournaments())
-        self.menu.add('auto', 'Liste de tous les tours d\'un tournoi', AllRoundTournament())
-        self.menu.add('auto', 'Liste de tous les matchs d\'un tournoi', AllMatchsTournament())
+        self.menu.add('auto', 'Liste de tous les tours d\'un tournoi', AllRoundTournamentMenu())
+        self.menu.add('auto', 'Liste de tous les matchs d\'un tournoi', AllMatchsTournamentMenu())
         self.menu.add('auto', 'Retour au menu principal', HomeMenuController())
 
         user_choice = self.view.get_user_choice()
