@@ -3,7 +3,7 @@
 
 from TournamentApp.utils.clear import Clear
 from TournamentApp.views.end_tournament_v import EndTournamentView
-from TournamentApp.controllers.rapport_c import AllActorAlpha, AllActorRank, AllMatchsTournamentMenu, AllPalyersAlphaMenu, AllPalyersRankMenu, AllRoundTournamentMenu, AllTournaments
+from TournamentApp.controllers.rapport_c import *
 from TournamentApp.views.rapport_v import RapportMenuView
 from TournamentApp.controllers.tournament_c import NewTournamentController
 from TournamentApp.utils.menus import Menu
@@ -30,6 +30,7 @@ class RapportMenuController:
         self.view = RapportMenuView(self.menu)
 
     def __call__(self):
+        Clear().screen()
         self.menu.add('auto', 'Liste de tous les acteurs par ordre alphabétique', AllActorAlpha())
         self.menu.add('auto', 'Liste de tous les acteurs par classement', AllActorRank())
         self.menu.add('auto', 'Liste de tous les joueurs d\'un tournoi par ordre alphabétique', AllPalyersAlphaMenu())

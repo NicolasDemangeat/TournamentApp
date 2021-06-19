@@ -23,9 +23,16 @@ class Tournament:
     def get_nb_rounds(self):
         return self.nb_rounds
 
-    def add_score(self, choices):
-        for player, choice in zip(self.players, choices):
+    def add_score(self, choices, round_num):
+        choices_values = [value for value in choices.values()]
+        tuples_values = [[choices_values[i], choices_values[i+1]] for i in range(0, len(choices_values), 2)]
+
+        for player, choice in choices.items():
             player.points += choice
+
+        for values, match in zip(tuples_values, self.rounds[round_num].matchs):
+            match.set_score_p1(values[0])
+            match.set_score_p2(values[1])
 
     def add_players(self, player):
         self.players.append(player)

@@ -4,7 +4,7 @@
 class TournamentView:
 
     def tournament_sequence(self):
-        liste_sentences = [
+        sentences = [
             '\nVeuillez saisir le nom du tournoi : ',
             '\nVeuillez saisir le lieux du tournoi : ',
             '\nVeuillez saisir le nombre de rounds : ',
@@ -12,18 +12,18 @@ class TournamentView:
             '\nVeuillez saisir la description du tournoi : '
         ]
 
-        liste_choices = []
+        choices = []
 
-        for sentence in liste_sentences:
+        for sentence in sentences:
             print(sentence)
-            liste_choices.append(input('>> '))
+            choices.append(input('>> '))
 
-        return liste_choices
+        return choices
 
     def players_sequence(self):
         print('\nCréation des joueurs.')
 
-        liste_sentences = [
+        sentences = [
             '\nVeuillez saisir le prénom du joueur : ',
             '\nVeuillez saisir le nom du joueur : ',
             '\nVeuillez saisir la date de naissance du joueur : ',
@@ -31,13 +31,13 @@ class TournamentView:
             '\nVeuillez saisir le rang du joueur : '
         ]
 
-        liste_choices = []
+        choices = []
 
-        for sentence in liste_sentences:
+        for sentence in sentences:
             print(sentence)
-            liste_choices.append(input('>> '))
-        
-        return liste_choices
+            choices.append(input('>> '))
+
+        return choices
 
     def player_continue(self):
         continuer = True
@@ -51,17 +51,23 @@ class TournamentView:
                 continuer = False
                 return True
 
-    def matchs_selection(self, tournoi, round_num):
+    def set_players_score(self, tournoi, round_num):
         print('Voici la liste des matchs : ')
-        for value in tournoi.rounds[round_num].matchs:
-            print(value.get_match)
+        for match in tournoi.rounds[round_num].matchs:
+            print(match.get_match)
 
-    def set_players_score(self, tournoi):
-        choices = []
-        for value in tournoi.players:
-            print(f'Combien de point pour le joueur {value.first_name} : ')
-            choices.append(float(input('>> ')))
-        
+        choices = {}
+
+        for match in tournoi.rounds[round_num].matchs:
+            for player in match.get_players:
+                while True:
+                    print(f'Combien de point pour le joueur {player.first_name} : ')
+                    try:
+                        choices[player] = float(input('>> '))
+                        break
+                    except ValueError:
+                        print('Un chiffre est attendu, veuillez réessayer.')
+
         return choices
     
     def winner_announcement(self, tournoi):

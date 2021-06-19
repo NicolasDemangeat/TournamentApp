@@ -47,13 +47,13 @@ class ManagementDataBase:
                 player_2 = match.player_2
 
                 serialized_player_1 = self.serialize_players(player_1)
-
                 serialized_player_2 = self.serialize_players(player_2)
 
                 points_p1 = match.points_p1
                 points_p2 = match.points_p2
 
-                serialized_match = ([serialized_player_1, 'score :' + points_p1], [serialized_player_2, 'score :' + points_p2])
+                serialized_match = ([serialized_player_1, 'score: ' + str(points_p1)], 
+                                    [serialized_player_2, 'score: ' + str(points_p2)])
 
                 instance_match = {"match": serialized_match}
 

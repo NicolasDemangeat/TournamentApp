@@ -19,27 +19,18 @@ class NewTournamentController:
     def __call__(self):
         Clear().screen()
         choices = self.view.tournament_sequence()
-
         self.tournament = Tournament(*choices)
-        if self.data_base.tournaments_table.contains((
-                    (where('name') == self.tournament.name) & (
-                    where('place') == self.tournament.place) & (
-                    where('date_start') == self.tournament.date) & (
-                    where('nb_total_round') == self.tournament.nb_rounds) & (
-                    where('control_time') == self.tournament.time_control) & (
-                    where('description') == self.tournament.description))):
-
-                self._view.already_in_db()
         self.data_base.save_tournament(self.tournament)
-
         Clear().screen()
 
         continuer = True
         while continuer:
             liste_players = self.view.players_sequence()
+            
             player = Player(*liste_players)
             self.tournament.add_players(player)
             self.data_base.save_players(player)
+            self.data_base.save_tournament(self.tournament)
             continuer = self.view.player_continue()
             Clear().screen()
 
@@ -48,10 +39,10 @@ class NewTournamentController:
                 self.tournament.set_first_round()
             else:
                 self.tournament.set_next_round()
-            self.view.matchs_selection(self.tournament, i)
-            choices = self.view.set_players_score(self.tournament)
-            self.tournament.add_score(choices)
+            choices = self.view.set_players_score(self.tournament, i)
+            self.tournament.add_score(choices, i)
             self.tournament.rounds[i].set_end_date()
+            self.data_base.save_tournament(self.tournament)
             Clear().screen()
 
         self.data_base.save_tournament(self.tournament)
