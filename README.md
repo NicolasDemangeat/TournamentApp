@@ -5,7 +5,7 @@ Application de gestion de tournois d'échec.
 1. [Prérequis](#1-prérequis)
 2. [Informations générales](#2-informations-générales)   
 3. [Exécuter le script](#3-exécuter-le-script)
-4. [Fonctionnement](#4-Fonctionnement)
+4. [Fonctionnement](#4-fonctionnement)
 5. [Futures améliorations](#5-futures-améliorations)
 6. [Auteur](#6-auteur)
 
@@ -21,11 +21,11 @@ https://www.python.org/downloads/release/python-390/
   
   Vous pouvez affichez ensuite différents rapports :
   - Liste de tous les acteurs :
-   - par ordre alphabétique
-   - par classement
+    - par ordre alphabétique
+    - par classement
   - Liste de tous les joueurs d'un tournoi :
-   - par ordre alphabétique
-   - par classement
+    - par ordre alphabétique
+    - par classement
   - Liste de tous les tournois.
   - Liste de tous les tours d'un tournoi.
   - Liste de tous les matchs d'un tournoi. 
