@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 # coding: utf-8
 
-from tinydb import TinyDB, where
+from tinydb import TinyDB, where, Query
 
 class ManagementDataBase:
     """
@@ -12,6 +12,7 @@ class ManagementDataBase:
         self.db = TinyDB('db_echec.json')
         self.tournaments_table = self.db.table('tournaments')
         self.players_table = self.db.table('players')
+        self.query = Query()
 
     def serialize_players(self, player):
         serialize_player = {"first_name": player.first_name,
@@ -111,3 +112,20 @@ class ManagementDataBase:
         else:
             serialize_tournament = self.serialize_tournament(tournament)
             self.tournaments_table.insert(serialize_tournament)
+
+    def find_player(self, first_name, last_name, birth_date):
+        """Check if player exist"""
+
+        if self.players_table.contains((where("first_name") == first_name) & (
+                where("last_name") == last_name) & (
+                where("birth_date") == birth_date)):
+            return True
+        else:
+            return False
+
+    def rank_update(self, first_name, last_name, birth_date, rank):
+        self.players_table.update(
+            {'ranking': int(rank)}, 
+            ((where('first_name') == first_name) & 
+            (where('last_name') == last_name) & 
+            (where('birth_date') == birth_date)))

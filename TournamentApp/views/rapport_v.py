@@ -26,9 +26,7 @@ class RapportPlayerView:
     def display_player_alpha(self, table):
         print('Liste de tous les acteurs par ordre alphabétique : \n')
 
-        sorted_players = sorted(table, key=lambda k: k['last_name'])
-
-        for player in sorted_players:
+        for player in table:
             print(f"NOM DE FAMILLE : {player['last_name']},"
                   f" PRÉNOM : {player['first_name']},"
                   f" DATE DE NAISSANCE : {player['birth_date']},"
@@ -40,9 +38,7 @@ class RapportPlayerView:
     def display_player_ranking(self, table):
         print('Liste de tous les acteurs par classement : \n')
 
-        sorted_players = sorted(table, key=lambda k: int(k['ranking']))
-
-        for player in sorted_players:
+        for player in table:
             print(f"NOM DE FAMILLE : {player['last_name']},"
                   f" PRÉNOM : {player['first_name']},"
                   f" DATE DE NAISSANCE : {player['birth_date']},"

@@ -3,11 +3,23 @@
 
 class TournamentView:
 
+    def empty_value(self):
+        print('\n! ERREUR ! Un champs est vide, veuillez recommencer.')
+
+    def not_integer(self):
+        print("\n! ERREUR ! Vous n'avez pas saisi de chiffre.")
+
+    def not_positiv(self):
+        print("\n! ERREUR ! Le chiffre saisi n'est pas positif.")
+
+    def not_date(self):
+        print("\n! ERREUR ! La date n'est pas au bon format.")
+
     def tournament_sequence(self):
         sentences = [
             '\nVeuillez saisir le nom du tournoi : ',
             '\nVeuillez saisir le lieux du tournoi : ',
-            '\nVeuillez saisir le nombre de rounds : ',
+            '\nVeuillez saisir le nombre de rounds (en chiffre) : ',
             '\nVeuillez saisir le style de controle du temps : ',
             '\nVeuillez saisir la description du tournoi : '
         ]
@@ -26,9 +38,9 @@ class TournamentView:
         sentences = [
             '\nVeuillez saisir le prénom du joueur : ',
             '\nVeuillez saisir le nom du joueur : ',
-            '\nVeuillez saisir la date de naissance du joueur : ',
-            '\nVeuillez saisir le genre du joueur : ',
-            '\nVeuillez saisir le rang du joueur : '
+            '\nVeuillez saisir la date de naissance du joueur (JJ/MM/AAAA) : ',
+            '\nVeuillez saisir le genre du joueur (M ou F) : ',
+            '\nVeuillez saisir le rang du joueur (chiffre entier positif) : '
         ]
 
         choices = []

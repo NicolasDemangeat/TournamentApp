@@ -5,7 +5,7 @@ from TournamentApp.models.managementbdd import ManagementDataBase
 from TournamentApp.utils.menus import Menu
 from TournamentApp.utils.clear import Clear
 from TournamentApp.controllers import menu_c
-from tinydb import TinyDB, where
+from tinydb import TinyDB
 from TournamentApp.views.rapport_v import RapportPlayerView, RapportTournamentMenuView, RapportTournamentView
 
 class AllActorAlpha:
@@ -16,7 +16,8 @@ class AllActorAlpha:
 
     def __call__(self):
         Clear().screen()
-        self.view.display_player_alpha(self.players_table)
+        sorted_players = sorted(self.players_table, key=lambda k: k['last_name'])
+        self.view.display_player_alpha(sorted_players)
 
         return menu_c.RapportMenuController()
 
@@ -28,7 +29,8 @@ class AllActorRank:
 
     def __call__(self):
         Clear().screen()
-        self.view.display_player_ranking(self.players_table)
+        sorted_players = sorted(self.players_table, key=lambda k: int(k['ranking']))
+        self.view.display_player_ranking(sorted_players)
 
         return menu_c.RapportMenuController()
 

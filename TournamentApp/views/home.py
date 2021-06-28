@@ -1,9 +1,6 @@
 #! /usr/bin/env python3
 # coding: utf-8
 
-from TournamentApp.utils.clear import Clear
-
-
 class HomeMenuView:
     def __init__(self, menu):
         self.menu = menu
@@ -17,7 +14,7 @@ class HomeMenuView:
 
     def get_user_choice(self):
         while True:
-            self._display_menu()            
+            self._display_menu()
             choice = input('>> ')
             if choice in self.menu:
                 return self.menu[choice]

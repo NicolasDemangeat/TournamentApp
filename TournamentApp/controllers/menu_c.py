@@ -1,6 +1,7 @@
 #! /usr/bin/env python3
 # coding: utf-8
 
+from TournamentApp.controllers.update_rank_c import UpdateRankControler
 from TournamentApp.utils.clear import Clear
 from TournamentApp.views.end_tournament_v import EndTournamentView
 from TournamentApp.controllers.rapport_c import *
@@ -18,6 +19,7 @@ class HomeMenuController:
         Clear().screen()
         self.menu.add('auto', 'Créer un tournoi', NewTournamentController())
         self.menu.add('auto', 'Générer des rapports', RapportMenuController())
+        self.menu.add('auto', "Modifier le classement d'un joueur", UpdateRankControler())
         self.menu.add('auto', 'Quitter', EndAppController())
 
         user_choice = self.view.get_user_choice()
@@ -55,6 +57,7 @@ class EndTournamentMenuController:
 
     def __call__(self):
         self.menu.add('auto', 'Retour au menu principal', HomeMenuController())
+        self.menu.add('auto', "Modifier le classement d'un joueur", UpdateRankControler())
         self.menu.add('auto', 'Quitter l\'application', EndAppController())
 
         user_choice = self.view.get_user_choice()
