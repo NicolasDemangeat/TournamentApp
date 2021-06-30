@@ -1,11 +1,8 @@
 #! /usr/bin/env python3
 # coding: utf-8
 
-import os
-import sys
-BASE_DIR = os.getcwd()
-sys.path.append(BASE_DIR)
 import datetime
+
 
 class Round:
     '''Class management round'''

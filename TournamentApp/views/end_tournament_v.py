@@ -1,6 +1,7 @@
 #! /usr/bin/env python3
 # coding: utf-8
 
+
 class EndTournamentView:
     def __init__(self, menu):
         self.menu = menu
@@ -14,7 +15,7 @@ class EndTournamentView:
 
     def get_user_choice(self):
         while True:
-            self._display_menu()            
+            self._display_menu()
             choice = input('>> ')
             if choice in self.menu:
                 return self.menu[choice]

@@ -4,7 +4,9 @@
 from TournamentApp.models.round import Round
 from TournamentApp.models.match import Match
 import datetime
-import itertools
+from itertools import repeat
+import os
+
 
 class Tournament:
     '''Class management tournament'''
@@ -21,7 +23,7 @@ class Tournament:
 
     @property
     def get_nb_rounds(self):
-        return self.nb_rounds
+        return int(self.nb_rounds)
 
     def add_score(self, choices, round_num):
         choices_values = [value for value in choices.values()]
@@ -42,36 +44,50 @@ class Tournament:
 
     def set_first_round(self):
         '''Methode to create the first round'''
-        self.all_possible_pairs = set(itertools.combinations(self.players, 2))
         self.match_already_done = set()
-
         players_sorted_by_rank = sorted(self.players, key=lambda x: x.ranking)
         first_half = players_sorted_by_rank[:len(players_sorted_by_rank)//2]
         second_half = players_sorted_by_rank[len(players_sorted_by_rank)//2:]
-        round1 = Round()        
+        round1 = Round()
 
-        for i, el in enumerate(first_half):
-            round1.add_match(Match(el, el.points, second_half[i], second_half[i].points))
-            self.match_already_done.add((el, second_half[i]))
+        for player1, player2 in zip(first_half, second_half):
+            round1.add_match(Match(player1, player1.points, player2, player2.points))
+            self.match_already_done.add((player1, player2))
+            self.match_already_done.add((player2, player1))
 
         self.add_rounds(round1)
 
     def set_next_round(self):
         '''Methode to create the n next rounds'''
-        
-        rest_paires = self.all_possible_pairs - self.match_already_done
-        players_sorted_by_points = sorted(self.players, key=lambda x: (x.points, x.ranking), reverse=True)
-        round_n = Round()        
 
-        for i in range(0, len(players_sorted_by_points), 2):
-            temp = (players_sorted_by_points[i], players_sorted_by_points[i+1])
-            round_n.add_match(Match(players_sorted_by_points[i], 
-            players_sorted_by_points[i].points, 
-            players_sorted_by_points[i+1], 
-            players_sorted_by_points[i+1].points))
-            self.match_already_done.add(temp)
+        players_sorted_by_points = sorted(self.players, key=lambda x: (x.points, x.ranking), reverse=True)
+        round_n = Round()
+
+        for i in range(len(players_sorted_by_points)//2):
+            print('dans set_next_round, première boucle for i in range(4)')
+            for player1, player2 in zip(repeat(players_sorted_by_points[0]), players_sorted_by_points[1:]):
+                print('dans deuxiéme for, avec player1 et player2')
+                temp = (player1, player2)
+                reverse_temp = (player2, player1)
+                print(f'{reverse_temp} et {temp} sont créés')
+                if temp not in self.match_already_done and reverse_temp not in self.match_already_done:
+                    round_n.add_match(Match(player1, player1.points, player2, player2.points))
+                    self.match_already_done.add(temp)
+                    self.match_already_done.add(reverse_temp)
+                    print(f'on affiche la liste player sorted by point {players_sorted_by_points}')
+                    players_sorted_by_points.remove(player1)
+                    players_sorted_by_points.remove(player2)
+                    print(f'on affiche la liste player sorted by point {players_sorted_by_points}')
+                    break
+                elif players_sorted_by_points.index(player2) == (len(players_sorted_by_points)-1):
+                    print('dans le else car temp ou reverse temp dans la liste des match deja joué')
+                    print(f'on force le match entre {player1} et {player2}')
+                    round_n.add_match(Match(player1, player1.points, player2, player2.points))
+                    self.match_already_done.add(temp)
+                    self.match_already_done.add(reverse_temp)
+                    players_sorted_by_points.remove(player1)
+                    players_sorted_by_points.remove(player2)
+                    os.system("pause")
+                    continue
 
         self.add_rounds(round_n)
-
-
-

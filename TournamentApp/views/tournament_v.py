@@ -81,7 +81,7 @@ class TournamentView:
                         print('Un chiffre est attendu, veuillez réessayer.')
 
         return choices
-    
+
     def winner_announcement(self, tournoi):
         for i, player in enumerate(sorted(tournoi.players, key=lambda x: (x.points, x.ranking), reverse=True)):
             print(f'Le numéro {i+1} du tournoi est [{player.first_name}] avec un score de {player.points}')

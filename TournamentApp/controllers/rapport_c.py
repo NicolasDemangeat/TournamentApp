@@ -8,6 +8,7 @@ from TournamentApp.controllers import menu_c
 from tinydb import TinyDB
 from TournamentApp.views.rapport_v import RapportPlayerView, RapportTournamentMenuView, RapportTournamentView
 
+
 class AllActorAlpha:
     def __init__(self):
         self.view = RapportPlayerView()
@@ -20,6 +21,7 @@ class AllActorAlpha:
         self.view.display_player_alpha(sorted_players)
 
         return menu_c.RapportMenuController()
+
 
 class AllActorRank:
     def __init__(self):
@@ -34,6 +36,7 @@ class AllActorRank:
 
         return menu_c.RapportMenuController()
 
+
 class AllPalyersAlphaMenu:
     def __init__(self):
         self.menu = Menu()
@@ -43,15 +46,16 @@ class AllPalyersAlphaMenu:
     def __call__(self):
         for tournament in self.data_base.tournaments_table:
             self.menu.add(
-                'auto', 
+                'auto',
                 f'NOM DU TOURNOI : {tournament["name"]}, '
                 f'LIEUX : {tournament["place"]}, '
-                f'DATE : {tournament["date"]}.', 
+                f'DATE : {tournament["date"]}.',
                 AllPlayersAlpha(tournament))
-        
+
         user_choice = self.view.get_user_choice()
 
         return user_choice.handler
+
 
 class AllPlayersAlpha:
     def __init__(self, tournament):
@@ -63,6 +67,7 @@ class AllPlayersAlpha:
 
         return menu_c.RapportMenuController()
 
+
 class AllPalyersRankMenu:
     def __init__(self):
         self.menu = Menu()
@@ -72,15 +77,16 @@ class AllPalyersRankMenu:
     def __call__(self):
         for tournament in self.data_base.tournaments_table:
             self.menu.add(
-                'auto', 
+                'auto',
                 f'NOM DU TOURNOI : {tournament["name"]}, '
                 f'LIEUX : {tournament["place"]}, '
-                f'DATE : {tournament["date"]}.', 
+                f'DATE : {tournament["date"]}.',
                 AllPlayersRank(tournament))
-        
+
         user_choice = self.view.get_user_choice()
 
         return user_choice.handler
+
 
 class AllPlayersRank:
     def __init__(self, tournament):
@@ -91,6 +97,7 @@ class AllPlayersRank:
         self.view.display_player_ranking(self.tournament['players_tournament'])
 
         return menu_c.RapportMenuController()
+
 
 class AllTournaments:
     def __init__(self):
@@ -104,6 +111,7 @@ class AllTournaments:
 
         return menu_c.RapportMenuController()
 
+
 class AllRoundTournamentMenu:
     def __init__(self):
         self.menu = Menu()
@@ -113,15 +121,16 @@ class AllRoundTournamentMenu:
     def __call__(self):
         for tournament in self.data_base.tournaments_table:
             self.menu.add(
-                'auto', 
+                'auto',
                 f'NOM DU TOURNOI : {tournament["name"]}, '
                 f'LIEUX : {tournament["place"]}, '
-                f'DATE : {tournament["date"]}.', 
+                f'DATE : {tournament["date"]}.',
                 AllRoundTournament(tournament))
-        
+
         user_choice = self.view.get_user_choice()
 
         return user_choice.handler
+
 
 class AllRoundTournament:
     def __init__(self, tournament):
@@ -134,6 +143,7 @@ class AllRoundTournament:
 
         return menu_c.RapportMenuController()
 
+
 class AllMatchsTournamentMenu:
     def __init__(self):
         self.menu = Menu()
@@ -143,15 +153,16 @@ class AllMatchsTournamentMenu:
     def __call__(self):
         for tournament in self.data_base.tournaments_table:
             self.menu.add(
-                'auto', 
+                'auto',
                 f'NOM DU TOURNOI : {tournament["name"]}, '
                 f'LIEUX : {tournament["place"]}, '
-                f'DATE : {tournament["date"]}.', 
+                f'DATE : {tournament["date"]}.',
                 AllMatchsTournament(tournament))
-        
+
         user_choice = self.view.get_user_choice()
 
         return user_choice.handler
+
 
 class AllMatchsTournament:
     def __init__(self, tournament):

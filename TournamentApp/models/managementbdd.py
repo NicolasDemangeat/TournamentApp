@@ -3,6 +3,7 @@
 
 from tinydb import TinyDB, where, Query
 
+
 class ManagementDataBase:
     """
     This class contains all methodes for save data into DataBase.
@@ -20,16 +21,16 @@ class ManagementDataBase:
                             "birth_date": player.birth_date,
                             "gender": player.gender,
                             "ranking": player.ranking}
-        
+
         return serialize_player
 
     def serialize_tournament(self, tournament):
         '''Serialize players, rounds and matchs'''
         instances_players = tournament.players
-        instances_rounds = tournament.rounds 
+        instances_rounds = tournament.rounds
 
         dicts_players = []
-        dicts_rounds = []        
+        dicts_rounds = []
         # serialized players
         for player in instances_players:
             instance = self.serialize_players(player)
@@ -53,25 +54,27 @@ class ManagementDataBase:
                 points_p1 = match.points_p1
                 points_p2 = match.points_p2
 
-                serialized_match = ([serialized_player_1, 'score: ' + str(points_p1)], 
+                serialized_match = ([serialized_player_1, 'score: ' + str(points_p1)],
                                     [serialized_player_2, 'score: ' + str(points_p2)])
 
                 instance_match = {"match": serialized_match}
 
                 matchs_list.append(instance_match)
 
-            instance_round = {"name": name, "start_date": start_date, "end_date": end_date, "matchs": matchs_list,}
+            instance_round = {"name": name, "start_date": start_date, "end_date": end_date, "matchs": matchs_list}
 
             dicts_rounds.append(instance_round)
-        
-        tournament_serialized = {"name": tournament.name, 
-                                "place": tournament.place,
-                                "nb_rounds": tournament.nb_rounds,
-                                "time_control": tournament.time_control,
-                                "description": tournament.description,
-                                "date": tournament.date,
-                                "players_tournament": dicts_players,
-                                "all_round": dicts_rounds}
+
+        tournament_serialized = {
+            "name": tournament.name,
+            "place": tournament.place,
+            "nb_rounds": tournament.nb_rounds,
+            "time_control": tournament.time_control,
+            "description": tournament.description,
+            "date": tournament.date,
+            "players_tournament": dicts_players,
+            "all_round": dicts_rounds
+            }
 
         return tournament_serialized
 
@@ -79,15 +82,15 @@ class ManagementDataBase:
         '''check if player exsit and replace him'''
 
         if self.players_table.search(
-                    (where("first_name") == player.first_name) & 
-                    (where("last_name") == player.last_name) & 
+                    (where("first_name") == player.first_name) &
+                    (where("last_name") == player.last_name) &
                     (where("birth_date") == player.birth_date)):
 
             serialize_player = self.serialize_players(player)
             self.players_table.remove(
-                (where("first_name") == player.first_name) & 
-                    (where("last_name") == player.last_name) & 
-                    (where("birth_date") == player.birth_date))
+                (where("first_name") == player.first_name) &
+                (where("last_name") == player.last_name) &
+                (where("birth_date") == player.birth_date))
 
             self.players_table.insert(serialize_player)
         else:
@@ -125,7 +128,7 @@ class ManagementDataBase:
 
     def rank_update(self, first_name, last_name, birth_date, rank):
         self.players_table.update(
-            {'ranking': int(rank)}, 
-            ((where('first_name') == first_name) & 
-            (where('last_name') == last_name) & 
-            (where('birth_date') == birth_date)))
+            {'ranking': int(rank)},
+            ((where('first_name') == first_name) &
+                (where('last_name') == last_name) &
+                (where('birth_date') == birth_date)))

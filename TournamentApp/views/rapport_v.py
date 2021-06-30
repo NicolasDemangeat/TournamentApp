@@ -10,17 +10,18 @@ class RapportMenuView:
         self.menu = menu
 
     def _display_menu(self):
-        print('\nVeuillez choisir une option en entrant le chiffre correspondant.')        
+        print('\nVeuillez choisir une option en entrant le chiffre correspondant.')
         for key, entry in self.menu.items():
             print(f'{key} : {entry.option}')
         print()
 
     def get_user_choice(self):
         while True:
-            self._display_menu()            
+            self._display_menu()
             choice = input('>> ')
             if choice in self.menu:
                 return self.menu[choice]
+
 
 class RapportPlayerView:
     def display_player_alpha(self, table):
@@ -47,9 +48,10 @@ class RapportPlayerView:
 
         os.system("pause")
 
+
 class RapportTournamentMenuView:
     def __init__(self, menu):
-        self.menu = menu    
+        self.menu = menu
 
     def _display_menu(self):
         Clear().screen()
@@ -60,12 +62,14 @@ class RapportTournamentMenuView:
 
     def get_user_choice(self):
         while True:
-            self._display_menu()            
+            self._display_menu()
             choice = input('>> ')
             if choice in self.menu:
                 return self.menu[choice]
 
+
 class RapportTournamentView:
+
     def display_all_tournaments(self, table):
         print('Liste de tous les tournois enregistrés.\n')
 

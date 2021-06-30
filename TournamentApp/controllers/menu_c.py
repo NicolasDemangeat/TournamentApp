@@ -4,11 +4,20 @@
 from TournamentApp.controllers.update_rank_c import UpdateRankControler
 from TournamentApp.utils.clear import Clear
 from TournamentApp.views.end_tournament_v import EndTournamentView
-from TournamentApp.controllers.rapport_c import *
+from TournamentApp.controllers.rapport_c import (
+    AllActorAlpha,
+    AllActorRank,
+    AllPalyersAlphaMenu,
+    AllPalyersRankMenu,
+    AllTournaments,
+    AllRoundTournamentMenu,
+    AllMatchsTournamentMenu
+    )
 from TournamentApp.views.rapport_v import RapportMenuView
 from TournamentApp.controllers.tournament_c import NewTournamentController
 from TournamentApp.utils.menus import Menu
 from TournamentApp.views.home import HomeMenuView
+
 
 class HomeMenuController:
     def __init__(self):
@@ -25,6 +34,7 @@ class HomeMenuController:
         user_choice = self.view.get_user_choice()
 
         return user_choice.handler
+
 
 class RapportMenuController:
     def __init__(self):
@@ -46,9 +56,11 @@ class RapportMenuController:
 
         return user_choice.handler
 
+
 class EndAppController:
     def __call__(self):
         return None
+
 
 class EndTournamentMenuController:
     def __init__(self):

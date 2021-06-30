@@ -3,6 +3,7 @@
 
 import datetime
 
+
 class Constraint:
 
     def not_empty(self, value):
@@ -21,7 +22,7 @@ class Constraint:
         try:
             self.value = int(self.value)
             return True
-        except:
+        except ValueError:
             return False
 
     def is_float(self, value):
@@ -30,20 +31,20 @@ class Constraint:
         try:
             self.value = float(self.value)
             return True
-        except:
+        except ValueError:
             return False
 
     def is_positiv(self, value):
         try:
             self.value = int(value)
-        except:
+        except ValueError:
             return False
 
         if self.value < 0:
             return False
         else:
             return True
-    
+
     def is_date(self, value):
         self.value = value.split('/')
 
@@ -51,7 +52,7 @@ class Constraint:
             day = int(self.value[0])
             month = int(self.value[1])
             year = int(self.value[2])
-        except:
+        except ValueError:
             return False
 
         try:
@@ -59,4 +60,3 @@ class Constraint:
             return True
         except ValueError:
             return False
-

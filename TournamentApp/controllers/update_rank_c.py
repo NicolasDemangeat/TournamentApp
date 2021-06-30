@@ -17,7 +17,7 @@ class UpdateRankControler:
     def __call__(self):
         Clear().screen()
         player_exist = False
-        while player_exist == False:
+        while player_exist is False:
             while True:
                 self.first_name = self.view.get_player_firstname()
                 check_first_name = [self.constraint.not_empty(self.first_name)]
@@ -38,7 +38,7 @@ class UpdateRankControler:
 
             player_exist = self.db.find_player(self.first_name, self.last_name, self.birth_date)
 
-            if player_exist == False:
+            if player_exist is False:
                 self.view.dont_exist()
 
         while True:

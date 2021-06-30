@@ -1,6 +1,7 @@
 #! /usr/bin/env python3
 # coding: utf-8
 
+
 class MenuEntry:
     def __init__(self, option, handler):
         self.option = option
@@ -11,6 +12,7 @@ class MenuEntry:
 
     def __str__(self):
         return str(self.option)
+
 
 class Menu:
     def __init__(self):
