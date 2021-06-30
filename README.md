@@ -40,7 +40,7 @@ Ensuite, en utilisant l'invite de commandes Windows (ou le terminal si vous ête
 - Installez les modules depuis requirements.txt
 ### Pour windows
 ```
-$ CD ../chemin/vers/TournamentApp-main
+$ CD /chemin/vers/TournamentApp-main
 $ python -m venv env
 $ env\Scripts\activate
 $ py -m pip install -U pip
@@ -48,11 +48,11 @@ $ pip install -r requirements.txt
 ```
 Vous pouvez maintenant exécuter le script.
 ```
-$ python TournamentApp\main.py
+$ python main.py
 ```
 ### Pour Unix
 ```
-$ cd ../chemin/vers/TournamentApp-main
+$ cd /chemin/vers/TournamentApp-main
 $ python3 -m venv env
 $ source env/bin/activate
 $ python3 -m pip install -U pip
@@ -60,7 +60,7 @@ $ pip install -r requirements.txt
 ```
 Vous pouvez maintenant exécuter le script.
 ```
-$ python3 TournamentApp\main.py
+$ python3 main.py
 ```
 
 ## 4. *Fonctionnement*
