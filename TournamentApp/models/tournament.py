@@ -5,7 +5,6 @@ from TournamentApp.models.round import Round
 from TournamentApp.models.match import Match
 import datetime
 from itertools import repeat
-import os
 
 
 class Tournament:
@@ -64,30 +63,26 @@ class Tournament:
         round_n = Round()
 
         for i in range(len(players_sorted_by_points)//2):
-            print('dans set_next_round, première boucle for i in range(4)')
             for player1, player2 in zip(repeat(players_sorted_by_points[0]), players_sorted_by_points[1:]):
-                print('dans deuxiéme for, avec player1 et player2')
                 temp = (player1, player2)
                 reverse_temp = (player2, player1)
-                print(f'{reverse_temp} et {temp} sont créés')
+
                 if temp not in self.match_already_done and reverse_temp not in self.match_already_done:
                     round_n.add_match(Match(player1, player1.points, player2, player2.points))
                     self.match_already_done.add(temp)
                     self.match_already_done.add(reverse_temp)
-                    print(f'on affiche la liste player sorted by point {players_sorted_by_points}')
                     players_sorted_by_points.remove(player1)
                     players_sorted_by_points.remove(player2)
-                    print(f'on affiche la liste player sorted by point {players_sorted_by_points}')
+
                     break
+
                 elif players_sorted_by_points.index(player2) == (len(players_sorted_by_points)-1):
-                    print('dans le else car temp ou reverse temp dans la liste des match deja joué')
-                    print(f'on force le match entre {player1} et {player2}')
                     round_n.add_match(Match(player1, player1.points, player2, player2.points))
                     self.match_already_done.add(temp)
                     self.match_already_done.add(reverse_temp)
                     players_sorted_by_points.remove(player1)
                     players_sorted_by_points.remove(player2)
-                    os.system("pause")
-                    continue
+
+                    break
 
         self.add_rounds(round_n)

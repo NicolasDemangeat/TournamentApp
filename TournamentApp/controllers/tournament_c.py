@@ -9,7 +9,6 @@ from TournamentApp.utils.clear import Clear
 from TournamentApp.models.player import Player
 from TournamentApp.models.tournament import Tournament
 from TournamentApp.views.tournament_v import TournamentView
-import os
 
 
 class NewTournamentController:
@@ -107,7 +106,6 @@ class NewTournamentController:
             self.tournament.add_score(choices, i)
             self.tournament.rounds[i].set_end_date()
             self.data_base.save_tournament(self.tournament)
-            os.system("pause")
             Clear().screen()
 
         # end of tournament
