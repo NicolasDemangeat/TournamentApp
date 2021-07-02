@@ -12,6 +12,11 @@ from TournamentApp.views.tournament_v import TournamentView
 
 
 class NewTournamentController:
+    """
+    Called when user want to create a new tournament.
+    Ask user's choices, check all choices, and create a new tournament.
+    """
+
     def __init__(self):
         self.view = TournamentView()
         self.data_base = ManagementDataBase()

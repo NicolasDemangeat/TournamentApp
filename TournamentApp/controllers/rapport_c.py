@@ -10,6 +10,8 @@ from TournamentApp.views.rapport_v import RapportPlayerView, RapportTournamentMe
 
 
 class AllActorAlpha:
+    """When called, display all actors sorted by alphabetical order."""
+
     def __init__(self):
         self.view = RapportPlayerView()
         self.db = TinyDB('db_echec.json')
@@ -24,6 +26,7 @@ class AllActorAlpha:
 
 
 class AllActorRank:
+    """When called, display all actors sorted by rank."""
     def __init__(self):
         self.view = RapportPlayerView()
         self.db = TinyDB('db_echec.json')
@@ -38,6 +41,11 @@ class AllActorRank:
 
 
 class AllPalyersAlphaMenu:
+    """
+    When called, display a menu that contains all tournament in DB.
+    User can choose a tournament,
+    and then call controller that displays all players sorted by alphabetical order.
+    """
     def __init__(self):
         self.menu = Menu()
         self.view = RapportTournamentMenuView(self.menu)
@@ -58,6 +66,7 @@ class AllPalyersAlphaMenu:
 
 
 class AllPlayersAlpha:
+    """Display all players sorted by alphabetical order in a tournament."""
     def __init__(self, tournament):
         self.tournament = tournament
         self.view = RapportPlayerView()
@@ -69,6 +78,11 @@ class AllPlayersAlpha:
 
 
 class AllPalyersRankMenu:
+    """
+    When called, display a menu that contains all tournament in DB.
+    User can choose a tournament,
+    and then call controller that displays all players sorted by rank.
+    """
     def __init__(self):
         self.menu = Menu()
         self.view = RapportTournamentMenuView(self.menu)
@@ -89,6 +103,7 @@ class AllPalyersRankMenu:
 
 
 class AllPlayersRank:
+    """Display all players sorted by rank in a tournament."""
     def __init__(self, tournament):
         self.tournament = tournament
         self.view = RapportPlayerView()
@@ -100,6 +115,7 @@ class AllPlayersRank:
 
 
 class AllTournaments:
+    """Display all tournaments in the DB."""
     def __init__(self):
         self.view = RapportTournamentView()
         self.db = TinyDB('db_echec.json')
@@ -113,6 +129,11 @@ class AllTournaments:
 
 
 class AllRoundTournamentMenu:
+    """
+    When called, display a menu that contains all tournament in DB.
+    User can choose a tournament,
+    and then call controller that displays all rounds played in the selected tournament.
+    """
     def __init__(self):
         self.menu = Menu()
         self.view = RapportTournamentMenuView(self.menu)
@@ -133,6 +154,7 @@ class AllRoundTournamentMenu:
 
 
 class AllRoundTournament:
+    """Display all rounds played in a tournament."""
     def __init__(self, tournament):
         self.tournament = tournament
         self.view = RapportTournamentView()
@@ -145,6 +167,11 @@ class AllRoundTournament:
 
 
 class AllMatchsTournamentMenu:
+    """
+    When called, display a menu that contains all tournament in DB.
+    User can choose a tournament,
+    and then call controller that displays all matchs played in the selected tournament.
+    """
     def __init__(self):
         self.menu = Menu()
         self.view = RapportTournamentMenuView(self.menu)
@@ -165,6 +192,7 @@ class AllMatchsTournamentMenu:
 
 
 class AllMatchsTournament:
+    """Display all matchs played in a tournament."""
     def __init__(self, tournament):
         self.tournament = tournament
         self.view = RapportTournamentView()

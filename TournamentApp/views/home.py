@@ -2,6 +2,8 @@
 # coding: utf-8
 
 class HomeMenuView:
+    """Display the main menu"""
+
     def __init__(self, menu):
         self.menu = menu
 

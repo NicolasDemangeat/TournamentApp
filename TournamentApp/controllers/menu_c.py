@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 # coding: utf-8
 
-from TournamentApp.controllers.update_rank_c import UpdateRankControler
+from TournamentApp.controllers.update_rank_c import UpdateRankController
 from TournamentApp.utils.clear import Clear
 from TournamentApp.views.end_tournament_v import EndTournamentView
 from TournamentApp.controllers.rapport_c import (
@@ -20,6 +20,7 @@ from TournamentApp.views.home import HomeMenuView
 
 
 class HomeMenuController:
+    """Main menu controller, display the menu."""
     def __init__(self):
         self.menu = Menu()
         self.view = HomeMenuView(self.menu)
@@ -28,7 +29,7 @@ class HomeMenuController:
         Clear().screen()
         self.menu.add('auto', 'Créer un tournoi', NewTournamentController())
         self.menu.add('auto', 'Générer des rapports', RapportMenuController())
-        self.menu.add('auto', "Modifier le classement d'un joueur", UpdateRankControler())
+        self.menu.add('auto', "Modifier le classement d'un joueur", UpdateRankController())
         self.menu.add('auto', 'Quitter', EndAppController())
 
         user_choice = self.view.get_user_choice()
@@ -37,6 +38,7 @@ class HomeMenuController:
 
 
 class RapportMenuController:
+    """Display the rapport main menu"""
     def __init__(self):
         self.menu = Menu()
         self.view = RapportMenuView(self.menu)
@@ -58,18 +60,20 @@ class RapportMenuController:
 
 
 class EndAppController:
+    """Close the app"""
     def __call__(self):
         return None
 
 
 class EndTournamentMenuController:
+    """Called when a tournament is finish, display a menu."""
     def __init__(self):
         self.menu = Menu()
         self.view = EndTournamentView(self.menu)
 
     def __call__(self):
         self.menu.add('auto', 'Retour au menu principal', HomeMenuController())
-        self.menu.add('auto', "Modifier le classement d'un joueur", UpdateRankControler())
+        self.menu.add('auto', "Modifier le classement d'un joueur", UpdateRankController())
         self.menu.add('auto', 'Quitter l\'application', EndAppController())
 
         user_choice = self.view.get_user_choice()

@@ -5,6 +5,7 @@ from TournamentApp.controllers.menu_c import HomeMenuController
 
 
 class ApplicationController:
+    """Main controller, called when the app start"""
 
     def __init__(self):
         self.controller = None

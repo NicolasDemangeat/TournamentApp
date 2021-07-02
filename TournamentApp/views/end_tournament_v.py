@@ -3,6 +3,7 @@
 
 
 class EndTournamentView:
+    """This class is called when a tournament if finish"""
     def __init__(self, menu):
         self.menu = menu
 

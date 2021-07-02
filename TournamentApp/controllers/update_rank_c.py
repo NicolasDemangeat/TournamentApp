@@ -8,7 +8,8 @@ from TournamentApp.views.rank_v import UpdateRankingView
 from TournamentApp.controllers import menu_c
 
 
-class UpdateRankControler:
+class UpdateRankController:
+    """This controler is called when user want to change player rank"""
     def __init__(self):
         self.view = UpdateRankingView()
         self.db = ManagementDataBase()
@@ -55,7 +56,7 @@ class UpdateRankControler:
             check_yes_or_no = [self.constraint.not_empty(self.yes_or_no)]
             if False not in check_yes_or_no and self.yes_or_no.lower() in ['o', 'n']:
                 if self.yes_or_no.lower() == 'o':
-                    return UpdateRankControler()
+                    return UpdateRankController()
                 elif self.yes_or_no.lower() == 'n':
                     return menu_c.HomeMenuController()
                 break

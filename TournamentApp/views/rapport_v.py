@@ -6,6 +6,8 @@ import os
 
 
 class RapportMenuView:
+    """This view display the rapport main menu"""
+
     def __init__(self, menu):
         self.menu = menu
 
@@ -24,6 +26,8 @@ class RapportMenuView:
 
 
 class RapportPlayerView:
+    """This view contains all methodes to display players, sort by alphabetical order or rank"""
+
     def display_player_alpha(self, table):
         print('Liste de tous les acteurs par ordre alphabétique : \n')
 
@@ -50,6 +54,8 @@ class RapportPlayerView:
 
 
 class RapportTournamentMenuView:
+    """Display a menu of all the tournaments in DB"""
+
     def __init__(self, menu):
         self.menu = menu
 
@@ -69,6 +75,7 @@ class RapportTournamentMenuView:
 
 
 class RapportTournamentView:
+    """Contains all methodes to display tournament infos"""
 
     def display_all_tournaments(self, table):
         print('Liste de tous les tournois enregistrés.\n')

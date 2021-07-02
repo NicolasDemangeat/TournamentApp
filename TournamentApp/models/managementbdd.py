@@ -5,9 +5,7 @@ from tinydb import TinyDB, where, Query
 
 
 class ManagementDataBase:
-    """
-    This class contains all methodes for save data into DataBase.
-    """
+    """This class contains all methodes for save data into DataBase."""
 
     def __init__(self):
         self.db = TinyDB('db_echec.json')
