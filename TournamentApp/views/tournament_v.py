@@ -2,7 +2,7 @@
 # coding: utf-8
 
 class TournamentView:
-    """Contains all methodes for a new tournament"""
+    """Contains all methods for a new tournament"""
 
     def empty_value(self):
         print('\n! ERREUR ! Un champs est vide, veuillez recommencer.')

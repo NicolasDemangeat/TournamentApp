@@ -26,7 +26,7 @@ class RapportMenuView:
 
 
 class RapportPlayerView:
-    """This view contains all methodes to display players, sort by alphabetical order or rank"""
+    """This view contains all methods to display players, sort by alphabetical order or rank"""
 
     def display_player_alpha(self, table):
         print('Liste de tous les acteurs par ordre alphabétique : \n')
@@ -75,7 +75,7 @@ class RapportTournamentMenuView:
 
 
 class RapportTournamentView:
-    """Contains all methodes to display tournament infos"""
+    """Contains all methods to display tournament infos"""
 
     def display_all_tournaments(self, table):
         print('Liste de tous les tournois enregistrés.\n')

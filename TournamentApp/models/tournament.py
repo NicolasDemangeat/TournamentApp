@@ -42,7 +42,7 @@ class Tournament:
         self.rounds.append(round)
 
     def set_first_round(self):
-        '''Methode to create the first round'''
+        '''Method to create the first round'''
         self.match_already_done = set()
         players_sorted_by_rank = sorted(self.players, key=lambda x: x.ranking)
         first_half = players_sorted_by_rank[:len(players_sorted_by_rank)//2]
@@ -57,7 +57,7 @@ class Tournament:
         self.add_rounds(round1)
 
     def set_next_round(self):
-        '''Methode to create the n next rounds'''
+        '''Method to create the n next rounds'''
 
         players_sorted_by_points = sorted(self.players, key=lambda x: (x.points, x.ranking), reverse=True)
         round_n = Round()

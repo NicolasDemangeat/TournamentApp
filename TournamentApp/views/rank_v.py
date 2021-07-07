@@ -3,7 +3,7 @@
 
 
 class UpdateRankingView:
-    """Contains methodes to update player rank"""
+    """Contains methods to update player rank"""
 
     def get_player_firstname(self):
         print('\n Veuillez saisir le prénom du joueur : ')

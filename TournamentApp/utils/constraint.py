@@ -5,7 +5,7 @@ import datetime
 
 
 class Constraint:
-    """This class contains all methodes to check input data"""
+    """This class contains all methods to check input data"""
 
     def not_empty(self, value):
         self.value = value
