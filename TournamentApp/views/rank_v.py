@@ -34,7 +34,7 @@ class UpdateRankingView:
         return rank
 
     def end_update(self):
-        print('\nLe classement du joueur à bien été mis à jour.')
+        print('\nLe classement du joueur à bien été mis à jour.\n')
         print("Voulez-vous mettre à jour le classement d'un autre joueur ? ['o' ou 'n'] ")
         yes_or_no = input('>> ')
 

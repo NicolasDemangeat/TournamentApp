@@ -114,10 +114,10 @@ class LoadPlayerMenu:
         for player in self.data_base.players_table:
             self.menu.add(
                 'auto',
-                f'PRENOM : {player["first_name"]}, '
-                f'NOM : {player["last_name"]}, '
-                f'DATE DE NAISSANCE: {player["birth_date"]}, '
-                f'CLASSEMENT : {player["ranking"]}',
+                f'PRENOM : {player["first_name"].center(15)}, '
+                f'NOM : {player["last_name"].center(15)}, '
+                f'DATE DE NAISSANCE: {player["birth_date"].center(12)}, '
+                f'CLASSEMENT : {player["ranking"].center(2)}',
                 LoadPlayerController(player, self.tournament))
 
         user_choice = self.view.get_user_choice()

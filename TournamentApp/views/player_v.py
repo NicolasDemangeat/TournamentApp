@@ -15,10 +15,10 @@ class LoadPlayerView:
         Clear().screen()
         print(f"IL Y A {len(self.tournament.players)} JOUEURS DANS CE TOURNOI : ")
         for player in self.tournament.players:
-            print(f"PRÉNOM : {player.first_name},"
-                  f" NOM DE FAMILLE : {player.last_name},"
-                  f" DATE DE NAISSANCE : {player.birth_date},"
-                  f" CLASSEMENT GÉNÉRAL : {player.ranking}].")
+            print(f"PRÉNOM : {player.first_name.center(15)},"
+                  f" NOM DE FAMILLE : {player.last_name.center(15)},"
+                  f" DATE DE NAISSANCE : {player.birth_date.center(12)},"
+                  f" CLASSEMENT GÉNÉRAL : {player.ranking.center(2)}].")
         print('\nVeuillez choisir le joueur en entrant le chiffre correspondant.\n')
         for key, entry in self.menu.items():
             print(f'{key} : {entry.option}')
@@ -46,10 +46,10 @@ class AddOrCreatePlayerView:
         Clear().screen()
         print(f"IL Y A {len(self.tournament.players)} JOUEURS DANS CE TOURNOI")
         for player in self.tournament.players:
-            print(f"NOM DE FAMILLE : {player.last_name},"
-                  f" PRÉNOM : {player.first_name},"
-                  f" DATE DE NAISSANCE : {player.birth_date},"
-                  f" CLASSEMENT GÉNÉRAL : {player.ranking}.")
+            print(f"NOM DE FAMILLE : {player.last_name.center(15)},"
+                  f" PRÉNOM : {player.first_name.center(15)},"
+                  f" DATE DE NAISSANCE : {player.birth_date.center(12)},"
+                  f" CLASSEMENT GÉNÉRAL : {player.ranking.center(2)}.")
         print('\nVeuillez choisir une option en entrant le chiffre correspondant.\n')
         for key, entry in self.menu.items():
             print(f'{key} : {entry.option}')

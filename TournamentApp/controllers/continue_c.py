@@ -1,12 +1,12 @@
 #! /usr/bin/env python3
 # coding: utf-8
 
+from tinydb import where
+import os
+
 from TournamentApp.controllers.tournament_c import NewRoundController
 from TournamentApp.controllers import menu_c
 from TournamentApp.views.tournament_v import TournamentView
-from tinydb import where
-
-import os
 from TournamentApp.models.managementbdd import ManagementDataBase
 from TournamentApp.views.rapport_v import RapportTournamentMenuView
 from TournamentApp.utils.menus import Menu
@@ -24,9 +24,9 @@ class ContinueTournamentMenu:
         for tournament in self.data_base.tournaments_table.search(where('end_date') == str("None")):
             self.menu.add(
                 'auto',
-                f'NOM DU TOURNOI : {tournament["name"]}, '
-                f'LIEUX : {tournament["place"]}, '
-                f'DATE : {tournament["date"]}.',
+                f'NOM DU TOURNOI : {tournament["name"].center(10)}, '
+                f'LIEUX : {tournament["place"].center(10)}, '
+                f'DATE : {tournament["date"].center(12)}.',
                 ContinueTournamentController(tournament))
 
         user_choice = self.view.get_user_choice()
