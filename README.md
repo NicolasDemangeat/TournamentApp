@@ -6,8 +6,9 @@ Application de gestion de tournois d'échec.
 2. [Informations générales](#2-informations-générales)   
 3. [Exécuter le script](#3-exécuter-le-script)
 4. [Fonctionnement](#4-fonctionnement)
-5. [Futures améliorations](#5-futures-améliorations)
-6. [Auteur](#6-auteur)
+5. [Générer un fichier flake8-html](#5-générer-un-fichier-flake8-html)
+6. [Futures améliorations](#6-futures-améliorations)
+7. [Auteur](#7-auteur)
 
 ## 1. Prérequis
 Pour pouvoir exécuter les scripts il nécessaire d'installer la version 3.9.0 de python : 
@@ -66,10 +67,23 @@ $ python3 main.py
 ## 4. *Fonctionnement*
 L'application vous guide pas à pas a travers les différents choix possible.
 
-## 5. *Futures améliorations*
+## 5. *Générer un fichier flake8-html*
+Tant que l'application ne tourne pas, vous pouvez utiliser flak8 et générer un fichier de rapport HTML.
+### Pour Windows
+```
+$ CD /chemin/vers/TournamentApp-main
+$ flake8 .\TournamentApp --max-line-length=119 --format=html --htmldir=flake-report
+```
+### Pour Unix
+```
+$ cd /chemin/vers/TournamentApp-main
+$ flake8 ./chessapp/ --max-line-length=119 --format=html --htmldir=flake-report
+```
+
+## 6. *Futures améliorations*
 Voici une liste des améliorations envisageable :
 - Faire une interface graphique (ou web)
 - ~~Possibilité de choisir parmis les joueurs déjà enregistrés en base de données.~~
 
-## 6. *Auteur*
+## 7. *Auteur*
 - Nicolas Demangeat > Profil : [CodeWars](https://www.codewars.com/users/Morkai) - [CodinGame](https://www.codingame.com/profile/12632339c7b1539aedc9bb480ed2cac44538993)
