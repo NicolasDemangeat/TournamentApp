@@ -53,7 +53,7 @@ class Constraint:
             day = int(self.value[0])
             month = int(self.value[1])
             year = int(self.value[2])
-        except ValueError:
+        except (ValueError, IndexError):
             return False
 
         try:

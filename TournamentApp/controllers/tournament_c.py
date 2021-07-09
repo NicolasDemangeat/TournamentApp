@@ -1,7 +1,6 @@
 #! /usr/bin/env python3
 # coding: utf-8
 
-import os
 
 from TournamentApp.utils.constraint import Constraint
 from TournamentApp.models.managementbdd import ManagementDataBase
@@ -105,6 +104,7 @@ class NewPlayersController:
             empty_check = [self.constraint.not_empty(choice) for choice in player_choices]
             integer_check = [self.constraint.is_integer(player_choices[4])]
             positiv_check = [self.constraint.is_positiv(player_choices[4])]
+            date_check = [self.constraint.is_date(player_choices[2])]
 
         player = Player(*player_choices)
         self.data_base.save_players(player)
@@ -119,7 +119,7 @@ class NewPlayersController:
                 return NewRoundController(self.tournament)
         else:
             self.view.player_added()
-            os.system("pause")
+            input('Appuyez sur une touche pour continuer...')
             return menu_c.HomeMenuController()
 
 

@@ -2,7 +2,6 @@
 # coding: utf-8
 
 from tinydb import where
-import os
 
 from TournamentApp.controllers.tournament_c import NewRoundController
 from TournamentApp.controllers import menu_c
@@ -24,9 +23,9 @@ class ContinueTournamentMenu:
         for tournament in self.data_base.tournaments_table.search(where('end_date') == str("None")):
             self.menu.add(
                 'auto',
-                f'NOM DU TOURNOI : {tournament["name"].center(10)}, '
-                f'LIEUX : {tournament["place"].center(10)}, '
-                f'DATE : {tournament["date"].center(12)}.',
+                f'NOM DU TOURNOI : {tournament["name"]:15}| '
+                f'LIEUX : {tournament["place"]:15}| '
+                f'DATE : {tournament["date"]:11}',
                 ContinueTournamentController(tournament))
 
         user_choice = self.view.get_user_choice()
@@ -47,9 +46,9 @@ class ContinueTournamentController:
 
         if new_tournament.round_played == 0:
             self.view.go_to_player_creation()
-            os.system("pause")
+            input('Appuyez sur une touche pour continuer...')
             return menu_c.AddOrCreatePlayerMenu(new_tournament)
         else:
             self.view.go_to_round_creation()
-            os.system("pause")
+            input('Appuyez sur une touche pour continuer...')
             return NewRoundController(new_tournament)

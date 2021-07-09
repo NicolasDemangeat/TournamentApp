@@ -2,7 +2,6 @@
 # coding: utf-8
 
 from tinydb import where
-import os
 
 from TournamentApp.views.player_v import AddOrCreatePlayerView, LoadPlayerView
 from TournamentApp.controllers.continue_c import ContinueTournamentMenu
@@ -109,15 +108,16 @@ class LoadPlayerMenu:
         Clear().screen()
         if len(self.data_base.players_table) < 1:
             self.view.not_in_db()
-            os.system("Pause")
+            input('Appuyez sur une touche pour continuer...')
             return NewPlayersController(self.tournament)
+
         for player in self.data_base.players_table:
             self.menu.add(
                 'auto',
-                f'PRENOM : {player["first_name"].center(15)}, '
-                f'NOM : {player["last_name"].center(15)}, '
-                f'DATE DE NAISSANCE: {player["birth_date"].center(12)}, '
-                f'CLASSEMENT : {player["ranking"].center(2)}',
+                f'PRENOM : {player["first_name"]:15}| '
+                f'NOM : {player["last_name"]:15}| '
+                f'DATE DE NAISSANCE: {player["birth_date"]:15}| '
+                f'CLASSEMENT : {player["ranking"]:15}',
                 LoadPlayerController(player, self.tournament))
 
         user_choice = self.view.get_user_choice()

@@ -1,8 +1,6 @@
 #! /usr/bin/env python3
 # coding: utf-8
 
-import os
-
 
 class TournamentView:
     """Contains all methods for a new tournament"""
@@ -94,7 +92,7 @@ class TournamentView:
         print()
         print(f'Le joueur [{player.first_name} {player.last_name}] a bien été ajouté au tournoi')
         print()
-        os.system("pause")
+        input('Appuyez sur une touche pour continuer...')
 
     def display_round_remaining(self, number):
         print()

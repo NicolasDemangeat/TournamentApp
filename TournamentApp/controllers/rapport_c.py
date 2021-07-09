@@ -1,11 +1,12 @@
 #! /usr/bin/env python3
 # coding: utf-8
 
+from tinydb import TinyDB
+
 from TournamentApp.models.managementbdd import ManagementDataBase
 from TournamentApp.utils.menus import Menu
 from TournamentApp.utils.clear import Clear
 from TournamentApp.controllers import menu_c
-from tinydb import TinyDB
 from TournamentApp.views.rapport_v import RapportPlayerView, RapportTournamentMenuView, RapportTournamentView
 
 
@@ -52,12 +53,19 @@ class AllPalyersAlphaMenu:
         self.data_base = ManagementDataBase()
 
     def __call__(self):
+        Clear().screen()
+
+        if len(self.data_base.tournaments_table) < 1:
+            self.view.not_in_db()
+            input('Appuyez sur une touche pour continuer...')
+            return menu_c.RapportMenuController()
+
         for tournament in self.data_base.tournaments_table:
             self.menu.add(
                 'auto',
-                f'NOM DU TOURNOI : {tournament["name"]}, '
-                f'LIEUX : {tournament["place"]}, '
-                f'DATE : {tournament["date"]}.',
+                f'NOM DU TOURNOI : {tournament["name"]:15}| '
+                f'LIEUX : {tournament["place"]:15}| '
+                f'DATE : {tournament["date"]:11}',
                 AllPlayersAlpha(tournament))
 
         user_choice = self.view.get_user_choice()
@@ -89,12 +97,19 @@ class AllPalyersRankMenu:
         self.data_base = ManagementDataBase()
 
     def __call__(self):
+        Clear().screen()
+
+        if len(self.data_base.tournaments_table) < 1:
+            self.view.not_in_db()
+            input('Appuyez sur une touche pour continuer...')
+            return menu_c.RapportMenuController()
+
         for tournament in self.data_base.tournaments_table:
             self.menu.add(
                 'auto',
-                f'NOM DU TOURNOI : {tournament["name"]}, '
-                f'LIEUX : {tournament["place"]}, '
-                f'DATE : {tournament["date"]}.',
+                f'NOM DU TOURNOI : {tournament["name"]:15}| '
+                f'LIEUX : {tournament["place"]:15}| '
+                f'DATE : {tournament["date"]:11}',
                 AllPlayersRank(tournament))
 
         user_choice = self.view.get_user_choice()
@@ -123,6 +138,11 @@ class AllTournaments:
 
     def __call__(self):
         Clear().screen()
+        if len(self.tournaments_table) < 1:
+            self.view.not_in_db()
+            input('Appuyez sur une touche pour continuer...')
+            return menu_c.RapportMenuController()
+
         self.view.display_all_tournaments(self.tournaments_table)
 
         return menu_c.RapportMenuController()
@@ -140,12 +160,18 @@ class AllRoundTournamentMenu:
         self.data_base = ManagementDataBase()
 
     def __call__(self):
+        Clear().screen()
+        if len(self.data_base.tournaments_table) < 1:
+            self.view.not_in_db()
+            input('Appuyez sur une touche pour continuer...')
+            return menu_c.RapportMenuController()
+
         for tournament in self.data_base.tournaments_table:
             self.menu.add(
                 'auto',
-                f'NOM DU TOURNOI : {tournament["name"]}, '
-                f'LIEUX : {tournament["place"]}, '
-                f'DATE : {tournament["date"]}.',
+                f'NOM DU TOURNOI : {tournament["name"]:15}| '
+                f'LIEUX : {tournament["place"]:15}| '
+                f'DATE : {tournament["date"]:11}',
                 AllRoundTournament(tournament))
 
         user_choice = self.view.get_user_choice()
@@ -178,12 +204,18 @@ class AllMatchsTournamentMenu:
         self.data_base = ManagementDataBase()
 
     def __call__(self):
+        Clear().screen()
+        if len(self.data_base.tournaments_table) < 1:
+            self.view.not_in_db()
+            input('Appuyez sur une touche pour continuer...')
+            return menu_c.RapportMenuController()
+
         for tournament in self.data_base.tournaments_table:
             self.menu.add(
                 'auto',
-                f'NOM DU TOURNOI : {tournament["name"]}, '
-                f'LIEUX : {tournament["place"]}, '
-                f'DATE : {tournament["date"]}.',
+                f'NOM DU TOURNOI : {tournament["name"]:15}| '
+                f'LIEUX : {tournament["place"]:15}| '
+                f'DATE : {tournament["date"]:11}',
                 AllMatchsTournament(tournament))
 
         user_choice = self.view.get_user_choice()
