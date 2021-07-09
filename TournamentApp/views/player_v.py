@@ -30,7 +30,7 @@ class LoadPlayerView:
             choice = input('>> ')
             if choice in self.menu:
                 return self.menu[choice]
-    
+
     def not_in_db(self):
         print("\nIl n'y a pas de joueurs dans la base de données, ")
         print('vous allez être redirigé vers la création de nouveaux joueurs.')
