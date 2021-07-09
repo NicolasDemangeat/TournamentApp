@@ -69,7 +69,7 @@ L'application vous guide pas à pas a travers les différents choix possible.
 ## 5. *Futures améliorations*
 Voici une liste des améliorations envisageable :
 - Faire une interface graphique (ou web)
-- Possibilité de choisir parmis les joueurs déjà enregistrés en base de données.
+- ~~Possibilité de choisir parmis les joueurs déjà enregistrés en base de données.~~
 
 ## 6. *Auteur*
 - Nicolas Demangeat > Profil : [CodeWars](https://www.codewars.com/users/Morkai) - [CodinGame](https://www.codingame.com/profile/12632339c7b1539aedc9bb480ed2cac44538993)
