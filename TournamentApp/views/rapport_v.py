@@ -102,9 +102,10 @@ class RapportTournamentView:
         os.system("pause")
 
     def display_all_matchs(self, tournament):
-        print('Liste de tous les matchs du tournoi : ')
+        print('Liste de tous les matchs du tournoi : \n')
 
         for round in tournament:
+            print()
             for i, match in enumerate(round['matchs']):
                 print(f'{round["name"]} - MATCH {i+1} : {match["match"]}')
 

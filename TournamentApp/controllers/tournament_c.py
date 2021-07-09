@@ -1,6 +1,8 @@
 #! /usr/bin/env python3
 # coding: utf-8
 
+import os
+
 from TournamentApp.utils.constraint import Constraint
 from TournamentApp.models.managementbdd import ManagementDataBase
 from TournamentApp.models.round import Round
@@ -43,66 +45,122 @@ class NewTournamentController:
 
         self.tournament = Tournament(*choices)
         self.data_base.save_tournament(self.tournament)
-        Clear().screen()
 
-        # players creation and save in DB
-        continuer = True
-        while continuer:
+        return menu_c.AddOrCreatePlayerMenu(self.tournament)
+
+
+class NewPlayersController:
+    """Create new player, add in DB and in tournament"""
+
+    def __init__(self, tournament=None):
+        self.tournament = tournament
+        self.view = TournamentView()
+        self.data_base = ManagementDataBase()
+        self.constraint = Constraint()
+
+    def __call__(self):
+        Clear().screen()
+        player_choices = self.view.players_sequence()
+        empty_check = [self.constraint.not_empty(choice) for choice in player_choices]
+        integer_check = [self.constraint.is_integer(player_choices[4])]
+        positiv_check = [self.constraint.is_positiv(player_choices[4])]
+        date_check = [self.constraint.is_date(player_choices[2])]
+
+        while (False in empty_check or False in integer_check
+                or False in positiv_check or False in date_check):
+            if (False in empty_check and False in integer_check
+                    and False in positiv_check and False in date_check):
+                self.view.empty_value()
+                self.view.not_integer()
+                self.view.not_positiv()
+                self.view.not_date()
+            elif False in empty_check and False in integer_check:
+                self.view.empty_value()
+                self.view.not_integer()
+            elif False in empty_check and False in positiv_check:
+                self.view.empty_value()
+                self.view.not_positiv()
+            elif False in empty_check and False in date_check:
+                self.view.empty_value()
+                self.view.not_date()
+            elif False in integer_check and False in positiv_check:
+                self.view.not_integer()
+                self.view.not_positiv()
+            elif False in integer_check and False in date_check:
+                self.view.not_integer()
+                self.view.not_date()
+            elif False in date_check and False in positiv_check:
+                self.view.not_date()
+                self.view.not_positiv()
+            elif False in integer_check:
+                self.view.not_integer()
+            elif False in empty_check:
+                self.view.empty_value()
+            elif False in positiv_check:
+                self.view.not_positiv()
+            elif False in date_check:
+                self.view.not_date()
+
             player_choices = self.view.players_sequence()
             empty_check = [self.constraint.not_empty(choice) for choice in player_choices]
             integer_check = [self.constraint.is_integer(player_choices[4])]
             positiv_check = [self.constraint.is_positiv(player_choices[4])]
-            date_check = [self.constraint.is_date(player_choices[2])]
 
-            while (False in empty_check or False in integer_check
-                    or False in positiv_check or False in date_check):
-                if (False in empty_check and False in integer_check
-                        and False in positiv_check and False in date_check):
-                    self.view.empty_value()
-                    self.view.not_integer()
-                    self.view.not_positiv()
-                    self.view.not_date()
-                elif False in empty_check and False in integer_check:
-                    self.view.empty_value()
-                    self.view.not_integer()
-                elif False in empty_check and False in positiv_check:
-                    self.view.empty_value()
-                    self.view.not_positiv()
-                elif False in empty_check and False in date_check:
-                    self.view.empty_value()
-                    self.view.not_date()
-                elif False in integer_check and False in positiv_check:
-                    self.view.not_integer()
-                    self.view.not_positiv()
-                elif False in integer_check and False in date_check:
-                    self.view.not_integer()
-                    self.view.not_date()
-                elif False in date_check and False in positiv_check:
-                    self.view.not_date()
-                    self.view.not_positiv()
-                elif False in integer_check:
-                    self.view.not_integer()
-                elif False in empty_check:
-                    self.view.empty_value()
-                elif False in positiv_check:
-                    self.view.not_positiv()
-                elif False in date_check:
-                    self.view.not_date()
-
-                player_choices = self.view.players_sequence()
-                empty_check = [self.constraint.not_empty(choice) for choice in player_choices]
-                integer_check = [self.constraint.is_integer(player_choices[4])]
-                positiv_check = [self.constraint.is_positiv(player_choices[4])]
-
-            player = Player(*player_choices)
+        player = Player(*player_choices)
+        self.data_base.save_players(player)
+        if self.tournament:
             self.tournament.add_players(player)
-            self.data_base.save_players(player)
             self.data_base.save_tournament(self.tournament)
-            continuer = self.view.player_continue()
-            Clear().screen()
+            self.view.player_added()
+            continu = self.view.player_continue()
+            if continu:
+                return menu_c.AddOrCreatePlayerMenu(self.tournament)
+            else:
+                return NewRoundController(self.tournament)
+        else:
+            self.view.player_added()
+            os.system("pause")
+            return menu_c.HomeMenuController()
 
+
+class LoadPlayerController:
+    """Add the chosen player to the curent tournament"""
+
+    def __init__(self, player, tournament):
+        self.tournament = tournament
+        self.db = ManagementDataBase()
+        self.player = player
+        self.view = TournamentView()
+
+    def __call__(self):
+        new_player = self.db.load_player(self.player)
+        self.tournament.add_players(new_player)
+        self.view.display_add_player(new_player)
+
+        continu = self.view.player_continue()
+        if continu:
+            return menu_c.AddOrCreatePlayerMenu(self.tournament)
+        else:
+            return NewRoundController(self.tournament)
+
+
+class NewRoundController:
+    """Creat all rounds for a tournament"""
+
+    def __init__(self, tournament):
+        self.tournament = tournament
+        self.view = TournamentView()
+        self.data_base = ManagementDataBase()
+
+    def __call__(self):
+        Clear().screen()
         # creation of rounds
-        for i in range(int(self.tournament.get_nb_rounds)):
+        start = int(self.tournament.round_played)
+        end = int(self.tournament.get_nb_rounds)
+
+        for i in range(start, end):
+            nb_round_remaining = int(self.tournament.get_nb_rounds) - int(self.tournament.round_played)
+            self.view.display_round_remaining(nb_round_remaining)
             if i == 0:
                 self.tournament.set_first_round()
             else:
@@ -110,10 +168,12 @@ class NewTournamentController:
             choices = self.view.set_players_score(self.tournament, i)
             self.tournament.add_score(choices, i)
             self.tournament.rounds[i].set_end_date()
+            self.tournament.set_round_played()
             self.data_base.save_tournament(self.tournament)
             Clear().screen()
 
         # end of tournament
+        self.tournament.set_end_date()
         self.data_base.save_tournament(self.tournament)
         self.view.winner_announcement(self.tournament)
         Round.reset_round_number()

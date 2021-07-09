@@ -1,6 +1,9 @@
 #! /usr/bin/env python3
 # coding: utf-8
 
+import os
+
+
 class TournamentView:
     """Contains all methods for a new tournament"""
 
@@ -55,7 +58,7 @@ class TournamentView:
     def player_continue(self):
         continuer = True
         while continuer:
-            print('Voulez vous continuer de créer des joueurs pour ce tournoi ? [o / n]')
+            print('\nVoulez vous continuer d\'ajouter des joueurs ? [o / n]')
             choice = input('>> ')
             if choice.lower() == 'n':
                 continuer = False
@@ -86,3 +89,27 @@ class TournamentView:
     def winner_announcement(self, tournoi):
         for i, player in enumerate(sorted(tournoi.players, key=lambda x: (x.points, x.ranking), reverse=True)):
             print(f'Le numéro {i+1} du tournoi est [{player.first_name}] avec un score de {player.points}')
+
+    def display_add_player(self, player):
+        print()
+        print(f'Le joueur [{player.first_name} {player.last_name}] a bien été ajouté au tournoi')
+        print()
+        os.system("pause")
+
+    def display_round_remaining(self, number):
+        print()
+        print(f"Il reste {number} rounds")
+        print()
+
+    def player_added(self):
+        print()
+        print("Le joueur a bien été sauvegardé dans la base de données.")
+        print()
+
+    def go_to_player_creation(self):
+        print("\nAucun match n'a été joué dans ce tournoi, ")
+        print("vous allez être redirigé vers la création de joueurs.\n")
+
+    def go_to_round_creation(self):
+        print("\nDes matchs ont déjà été joués dans ce tournoi, ")
+        print("Vous allez être redirigé vers la génération des rounds suivants.\n")

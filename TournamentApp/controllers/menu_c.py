@@ -1,6 +1,12 @@
 #! /usr/bin/env python3
 # coding: utf-8
 
+from tinydb import where
+import os
+
+from TournamentApp.views.player_v import AddOrCreatePlayerView, LoadPlayerView
+from TournamentApp.controllers.continue_c import ContinueTournamentMenu
+from TournamentApp.models.managementbdd import ManagementDataBase
 from TournamentApp.controllers.update_rank_c import UpdateRankController
 from TournamentApp.utils.clear import Clear
 from TournamentApp.views.end_tournament_v import EndTournamentView
@@ -14,7 +20,7 @@ from TournamentApp.controllers.rapport_c import (
     AllMatchsTournamentMenu
     )
 from TournamentApp.views.rapport_v import RapportMenuView
-from TournamentApp.controllers.tournament_c import NewTournamentController
+from TournamentApp.controllers.tournament_c import LoadPlayerController, NewPlayersController, NewTournamentController
 from TournamentApp.utils.menus import Menu
 from TournamentApp.views.home import HomeMenuView
 
@@ -24,13 +30,22 @@ class HomeMenuController:
     def __init__(self):
         self.menu = Menu()
         self.view = HomeMenuView(self.menu)
+        self.db = ManagementDataBase()
 
     def __call__(self):
         Clear().screen()
-        self.menu.add('auto', 'Créer un tournoi', NewTournamentController())
-        self.menu.add('auto', 'Générer des rapports', RapportMenuController())
-        self.menu.add('auto', "Modifier le classement d'un joueur", UpdateRankController())
-        self.menu.add('auto', 'Quitter', EndAppController())
+        if self.db.tournaments_table.contains(where('end_date') == str("None")):
+            self.menu.add('auto', 'Reprendre un tournoi en cours', ContinueTournamentMenu())
+            self.menu.add('auto', 'Créer des joueurs', NewPlayersController())
+            self.menu.add('auto', 'Générer des rapports', RapportMenuController())
+            self.menu.add('auto', "Modifier le classement d'un joueur", UpdateRankController())
+            self.menu.add('auto', 'Quitter', EndAppController())
+        else:
+            self.menu.add('auto', 'Créer un tournoi', NewTournamentController())
+            self.menu.add('auto', 'Créer des joueurs', NewPlayersController())
+            self.menu.add('auto', 'Générer des rapports', RapportMenuController())
+            self.menu.add('auto', "Modifier le classement d'un joueur", UpdateRankController())
+            self.menu.add('auto', 'Quitter', EndAppController())
 
         user_choice = self.view.get_user_choice()
 
@@ -75,6 +90,53 @@ class EndTournamentMenuController:
         self.menu.add('auto', 'Retour au menu principal', HomeMenuController())
         self.menu.add('auto', "Modifier le classement d'un joueur", UpdateRankController())
         self.menu.add('auto', 'Quitter l\'application', EndAppController())
+
+        user_choice = self.view.get_user_choice()
+
+        return user_choice.handler
+
+
+class LoadPlayerMenu:
+    """Display a menu that contains all players in DB"""
+
+    def __init__(self, tournament):
+        self.menu = Menu()
+        self.data_base = ManagementDataBase()
+        self.tournament = tournament
+        self.view = LoadPlayerView(self.menu, self.tournament)
+
+    def __call__(self):
+        Clear().screen()
+        if len(self.data_base.players_table) < 1:
+            self.view.not_in_db()
+            os.system("Pause")
+            return NewPlayersController(self.tournament)
+        for player in self.data_base.players_table:
+            self.menu.add(
+                'auto',
+                f'PRENOM : {player["first_name"]}, '
+                f'NOM : {player["last_name"]}, '
+                f'DATE DE NAISSANCE: {player["birth_date"]}, '
+                f'CLASSEMENT : {player["ranking"]}',
+                LoadPlayerController(player, self.tournament))
+
+        user_choice = self.view.get_user_choice()
+
+        return user_choice.handler
+
+
+class AddOrCreatePlayerMenu:
+    """Display a menu for help user to choose between add or creat a player"""
+
+    def __init__(self, tournament):
+        self.menu = Menu()
+        self.tournament = tournament
+        self.view = AddOrCreatePlayerView(self.menu, self.tournament)
+
+    def __call__(self):
+        Clear().screen()
+        self.menu.add('auto', 'Choisir un joueur depuis la base de données', LoadPlayerMenu(self.tournament))
+        self.menu.add('auto', "Créer un nouveau joueur", NewPlayersController(self.tournament))
 
         user_choice = self.view.get_user_choice()
 

@@ -19,10 +19,19 @@ class Tournament:
         self.date = datetime.datetime.now().strftime("%d/%m/%Y")
         self.players = []
         self.rounds = []
+        self.end_date = "None"
+        self.round_played = 0
+        self.match_already_done = []
 
     @property
     def get_nb_rounds(self):
         return int(self.nb_rounds)
+
+    def set_end_date(self):
+        self.end_date = datetime.datetime.now().strftime("%d/%m/%Y")
+
+    def set_round_played(self):
+        self.round_played += 1
 
     def add_score(self, choices, round_num):
         choices_values = [value for value in choices.values()]
@@ -43,7 +52,6 @@ class Tournament:
 
     def set_first_round(self):
         '''Method to create the first round'''
-        self.match_already_done = set()
         players_sorted_by_rank = sorted(self.players, key=lambda x: x.ranking)
         first_half = players_sorted_by_rank[:len(players_sorted_by_rank)//2]
         second_half = players_sorted_by_rank[len(players_sorted_by_rank)//2:]
@@ -51,8 +59,8 @@ class Tournament:
 
         for player1, player2 in zip(first_half, second_half):
             round1.add_match(Match(player1, player1.points, player2, player2.points))
-            self.match_already_done.add((player1, player2))
-            self.match_already_done.add((player2, player1))
+            self.match_already_done.append((player1.first_name, player2.first_name))
+            self.match_already_done.append((player2.first_name, player1.first_name))
 
         self.add_rounds(round1)
 
@@ -64,13 +72,13 @@ class Tournament:
 
         for i in range(len(players_sorted_by_points)//2):
             for player1, player2 in zip(repeat(players_sorted_by_points[0]), players_sorted_by_points[1:]):
-                temp = (player1, player2)
-                reverse_temp = (player2, player1)
+                temp = (player1.first_name, player2.first_name)
+                reverse_temp = (player2.first_name, player1.first_name)
 
                 if temp not in self.match_already_done and reverse_temp not in self.match_already_done:
                     round_n.add_match(Match(player1, player1.points, player2, player2.points))
-                    self.match_already_done.add(temp)
-                    self.match_already_done.add(reverse_temp)
+                    self.match_already_done.append(temp)
+                    self.match_already_done.append(reverse_temp)
                     players_sorted_by_points.remove(player1)
                     players_sorted_by_points.remove(player2)
 
@@ -78,8 +86,8 @@ class Tournament:
 
                 elif players_sorted_by_points.index(player2) == (len(players_sorted_by_points)-1):
                     round_n.add_match(Match(player1, player1.points, player2, player2.points))
-                    self.match_already_done.add(temp)
-                    self.match_already_done.add(reverse_temp)
+                    self.match_already_done.append(temp)
+                    self.match_already_done.append(reverse_temp)
                     players_sorted_by_points.remove(player1)
                     players_sorted_by_points.remove(player2)
 
