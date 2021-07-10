@@ -4,11 +4,11 @@
 class Match:
     '''Class management Match'''
 
-    def __init__(self, player_1, points_p1, player_2, points_p2):
-        self.points_p1 = points_p1
-        self.points_p2 = points_p2
+    def __init__(self, player_1, player_2):
         self.player_1 = player_1
         self.player_2 = player_2
+        self.points_p1 = self.player_1.points
+        self.points_p2 = self.player_2.points
 
     @property
     def get_match(self):

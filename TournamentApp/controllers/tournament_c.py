@@ -135,6 +135,7 @@ class LoadPlayerController:
     def __call__(self):
         new_player = self.db.load_player(self.player)
         self.tournament.add_players(new_player)
+        self.db.save_tournament(self.tournament)
         self.view.display_add_player(new_player)
 
         continu = self.view.player_continue()

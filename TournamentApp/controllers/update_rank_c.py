@@ -46,7 +46,7 @@ class UpdateRankController:
             self.rank = self.view.new_rank()
             check_new_rank = [self.constraint.is_integer(self.rank)]
             if False not in check_new_rank:
-                self.rank = int(self.rank)
+                self.rank = self.rank
                 break
 
         self.db.rank_update(self.first_name, self.last_name, self.birth_date, self.rank)

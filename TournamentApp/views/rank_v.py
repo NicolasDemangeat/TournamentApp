@@ -28,7 +28,7 @@ class UpdateRankingView:
         print('Veuillez recommencer.')
 
     def new_rank(self):
-        print("\nQuel est le nouveau calssement du joueur ?")
+        print("\nQuel est le nouveau classement du joueur ?")
         rank = input('>> ')
 
         return rank
