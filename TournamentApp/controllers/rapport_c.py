@@ -57,7 +57,7 @@ class AllPalyersAlphaMenu:
 
         if len(self.data_base.tournaments_table) < 1:
             self.view.not_in_db()
-            input('Appuyez sur une touche pour continuer...')
+            input('\n\nAppuyez sur une touche pour continuer...')
             return menu_c.RapportMenuController()
 
         for tournament in self.data_base.tournaments_table:
@@ -101,7 +101,7 @@ class AllPalyersRankMenu:
 
         if len(self.data_base.tournaments_table) < 1:
             self.view.not_in_db()
-            input('Appuyez sur une touche pour continuer...')
+            input('\n\nAppuyez sur une touche pour continuer...')
             return menu_c.RapportMenuController()
 
         for tournament in self.data_base.tournaments_table:
@@ -140,7 +140,7 @@ class AllTournaments:
         Clear().screen()
         if len(self.tournaments_table) < 1:
             self.view.not_in_db()
-            input('Appuyez sur une touche pour continuer...')
+            input('\n\nAppuyez sur une touche pour continuer...')
             return menu_c.RapportMenuController()
 
         self.view.display_all_tournaments(self.tournaments_table)
@@ -163,7 +163,7 @@ class AllRoundTournamentMenu:
         Clear().screen()
         if len(self.data_base.tournaments_table) < 1:
             self.view.not_in_db()
-            input('Appuyez sur une touche pour continuer...')
+            input('\n\nAppuyez sur une touche pour continuer...')
             return menu_c.RapportMenuController()
 
         for tournament in self.data_base.tournaments_table:
@@ -207,7 +207,7 @@ class AllMatchsTournamentMenu:
         Clear().screen()
         if len(self.data_base.tournaments_table) < 1:
             self.view.not_in_db()
-            input('Appuyez sur une touche pour continuer...')
+            input('\n\nAppuyez sur une touche pour continuer...')
             return menu_c.RapportMenuController()
 
         for tournament in self.data_base.tournaments_table:
@@ -232,5 +232,6 @@ class AllMatchsTournament:
     def __call__(self):
         Clear().screen()
         self.view.display_all_matchs(self.tournament['all_round'])
+        self.view.winner_announcement(self.tournament["players_tournament"])
 
         return menu_c.RapportMenuController()

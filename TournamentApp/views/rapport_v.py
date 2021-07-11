@@ -37,7 +37,7 @@ class RapportPlayerView:
                   f" SEXE : {player['gender']:2}|"
                   f" CLASSEMENT GÉNÉRAL : {player['ranking']:2}")
 
-        input('Appuyez sur une touche pour continuer...')
+        input('\n\nAppuyez sur une touche pour continuer...')
 
     def display_player_ranking(self, table):
         print('Liste de tous les acteurs par classement : \n')
@@ -49,7 +49,7 @@ class RapportPlayerView:
                   f" SEXE : {player['gender']:2}|"
                   f" CLASSEMENT GÉNÉRAL : {player['ranking']:2}")
 
-        input('Appuyez sur une touche pour continuer...')
+        input('\n\nAppuyez sur une touche pour continuer...')
 
 
 class RapportTournamentMenuView:
@@ -91,7 +91,7 @@ class RapportTournamentView:
                   f"TYPE DE CONTROLE DU TEMPS : {tournament['time_control']:11}| "
                   f"DESCRIPTION : {tournament['description']:25}")
 
-        input('Appuyez sur une touche pour continuer...')
+        input('\n\nAppuyez sur une touche pour continuer...')
 
     def display_all_rounds(self, tournament):
         print('Liste de tous les rounds du tournoi : ')
@@ -102,7 +102,16 @@ class RapportTournamentView:
                   f"DATE DE FIN : {round['end_date']:11}| "
                   f"NOMBRES DE MATCHS : {str(len(round['matchs'])):3}")
 
-        input('Appuyez sur une touche pour continuer...')
+        input('\n\nAppuyez sur une touche pour continuer...')
+
+    def winner_announcement(self, tournament):
+        print()
+        for i, player in enumerate(sorted(tournament, key=lambda x: (x["points"], x["ranking"]), reverse=True)):
+            print(
+                f'Le numéro {i+1} du tournoi est '
+                f'[{player["first_name"]} {player["last_name"]}] avec un score de {player["points"]}'
+                )
+        input('\n\nAppuyez sur une touche pour continuer...')
 
     def display_all_matchs(self, tournament):
         print('Liste de tous les matchs du tournoi : ')
@@ -110,9 +119,15 @@ class RapportTournamentView:
         for round in tournament:
             print()
             for i, match in enumerate(round['matchs']):
-                print(f'{round["name"]} - MATCH {i+1} : {match["match"]}')
-
-        input('Appuyez sur une touche pour continuer...')
+                print(
+                    f'{round["name"]} - MATCH {i+1} : '
+                    f'[{match["player_1"]["first_name"]} {match["player_1"]["last_name"]}] '
+                    f'né(e) le [{match["player_1"]["birth_date"]}]'
+                    f' Score [{match["points_p1"]}] --CONTRE-- '
+                    f'[{match["player_2"]["first_name"]} {match["player_2"]["last_name"]}] '
+                    f'né(e) le [{match["player_2"]["birth_date"]}]'
+                    f' Score [{match["points_p2"]}]'
+                    )
 
     def not_in_db(self):
         print("\nIl n'y a pas de tournois dans la base de données, ")

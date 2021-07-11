@@ -58,7 +58,7 @@ class Tournament:
         round1 = Round()
 
         for player1, player2 in zip(first_half, second_half):
-            round1.add_match(Match(player1, player2))
+            round1.add_match(Match(player1, player1.points, player2, player2.points))
             self.match_already_done.append((player1.first_name, player2.first_name))
             self.match_already_done.append((player2.first_name, player1.first_name))
 
@@ -76,7 +76,7 @@ class Tournament:
                 reverse_temp = (player2.first_name, player1.first_name)
 
                 if temp not in self.match_already_done and reverse_temp not in self.match_already_done:
-                    round_n.add_match(Match(player1, player2))
+                    round_n.add_match(Match(player1, player1.points, player2, player2.points))
                     self.match_already_done.append(temp)
                     self.match_already_done.append(reverse_temp)
                     players_sorted_by_points.remove(player1)
@@ -85,7 +85,7 @@ class Tournament:
                     break
 
                 elif players_sorted_by_points.index(player2) == (len(players_sorted_by_points)-1):
-                    round_n.add_match(Match(player1, player2))
+                    round_n.add_match(Match(player1, player1.points, player2, player2.points))
                     self.match_already_done.append(temp)
                     self.match_already_done.append(reverse_temp)
                     players_sorted_by_points.remove(player1)

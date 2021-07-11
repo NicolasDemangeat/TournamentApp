@@ -19,7 +19,12 @@ from TournamentApp.controllers.rapport_c import (
     AllMatchsTournamentMenu
     )
 from TournamentApp.views.rapport_v import RapportMenuView
-from TournamentApp.controllers.tournament_c import LoadPlayerController, NewPlayersController, NewTournamentController
+from TournamentApp.controllers.tournament_c import (
+    LoadPlayerController,
+    NewPlayersController,
+    NewRoundController,
+    NewTournamentController
+    )
 from TournamentApp.utils.menus import Menu
 from TournamentApp.views.home import HomeMenuView
 
@@ -137,6 +142,7 @@ class AddOrCreatePlayerMenu:
         Clear().screen()
         self.menu.add('auto', 'Choisir un joueur depuis la base de données', LoadPlayerMenu(self.tournament))
         self.menu.add('auto', "Créer un nouveau joueur", NewPlayersController(self.tournament))
+        self.menu.add('auto', 'Commencer le tournoi', NewRoundController(self.tournament))
 
         user_choice = self.view.get_user_choice()
 

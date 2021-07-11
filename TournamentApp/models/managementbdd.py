@@ -57,8 +57,8 @@ class ManagementDataBase:
                 points_p1 = match.points_p1
                 points_p2 = match.points_p2
 
-                serialized_match = ([serialized_player_1, f'score: {points_p1}'],
-                                    [serialized_player_2, f'score: {points_p2}'])
+                serialized_match = ([serialized_player_1, f'{points_p1}'],
+                                    [serialized_player_2, f'{points_p2}'])
 
                 instance_match = {
                     "match": serialized_match,
@@ -168,6 +168,7 @@ class ManagementDataBase:
                 gender_p1 = match["player_1"]['gender']
                 ranking_p1 = match["player_1"]['ranking']
                 points_p1 = match["player_1"]['points']
+                points_m1 = match["points_p1"]
 
                 # player_2 dict to instance
                 first_name_p2 = match["player_2"]['first_name']
@@ -176,6 +177,7 @@ class ManagementDataBase:
                 gender_p2 = match["player_2"]['gender']
                 ranking_p2 = match["player_2"]['ranking']
                 points_p2 = match["player_2"]['points']
+                points_m2 = match["points_p2"]
 
                 player_1 = Player(
                     first_name_p1,
@@ -195,7 +197,7 @@ class ManagementDataBase:
                     points_p2
                 )
 
-                match = Match(player_1, player_2)
+                match = Match(player_1, points_m1, player_2, points_m2)
 
                 matchs_list.append(match)
 

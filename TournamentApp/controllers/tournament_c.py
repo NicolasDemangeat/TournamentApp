@@ -134,9 +134,18 @@ class LoadPlayerController:
 
     def __call__(self):
         new_player = self.db.load_player(self.player)
+        np_name = new_player.first_name
+        np_lname = new_player.last_name
+        nb_bd = new_player.birth_date
+        npl = [np_name, np_lname, nb_bd]
+
+        if npl in [[player.first_name, player.last_name, player.birth_date] for player in self.tournament.players]:
+            self.view.already_in_tournament()
+            return menu_c.AddOrCreatePlayerMenu(self.tournament)
+
         self.tournament.add_players(new_player)
         self.db.save_tournament(self.tournament)
-        self.view.display_add_player(new_player)
+        self.view.display_add_player(new_player, self.tournament)
 
         continu = self.view.player_continue()
         if continu:
@@ -160,8 +169,9 @@ class NewRoundController:
         end = int(self.tournament.get_nb_rounds)
 
         for i in range(start, end):
-            nb_round_remaining = int(self.tournament.get_nb_rounds) - int(self.tournament.round_played)
-            self.view.display_round_remaining(nb_round_remaining)
+            round_played = int(self.tournament.round_played)
+            nb_rounds = int(self.tournament.get_nb_rounds)
+            self.view.display_round_remaining(round_played, nb_rounds)
             if i == 0:
                 self.tournament.set_first_round()
             else:

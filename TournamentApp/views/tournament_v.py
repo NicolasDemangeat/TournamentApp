@@ -22,7 +22,7 @@ class TournamentView:
             '\nVeuillez saisir le nom du tournoi : ',
             '\nVeuillez saisir le lieux du tournoi : ',
             '\nVeuillez saisir le nombre de rounds (en chiffre) : ',
-            '\nVeuillez saisir le style de controle du temps : ',
+            '\nVeuillez saisir le style de controle du temps [Bullet-Blitz-Coup rapide] : ',
             '\nVeuillez saisir la description du tournoi : '
         ]
 
@@ -88,15 +88,15 @@ class TournamentView:
         for i, player in enumerate(sorted(tournoi.players, key=lambda x: (x.points, x.ranking), reverse=True)):
             print(f'Le numéro {i+1} du tournoi est [{player.first_name}] avec un score de {player.points}')
 
-    def display_add_player(self, player):
+    def display_add_player(self, player, tournament):
         print()
         print(f'Le joueur [{player.first_name} {player.last_name}] a bien été ajouté au tournoi')
+        print(f'Il y a {len(tournament.players)} joueurs dans ce tournoi.')
         print()
-        input('Appuyez sur une touche pour continuer...')
 
-    def display_round_remaining(self, number):
+    def display_round_remaining(self, round_played, nb_rounds):
         print()
-        print(f"Il reste {number} rounds")
+        print(f"Round {int(round_played)+1} sur {nb_rounds} rounds")
         print()
 
     def player_added(self):
@@ -111,3 +111,7 @@ class TournamentView:
     def go_to_round_creation(self):
         print("\nDes matchs ont déjà été joués dans ce tournoi, ")
         print("Vous allez être redirigé vers la génération des rounds suivants.\n")
+
+    def already_in_tournament(self):
+        print('\n! ERREUR ! Ce joueur est déjà présent.\n')
+        input('Appuyez sur une touche pour continuer...')

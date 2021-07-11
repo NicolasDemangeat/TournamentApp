@@ -26,6 +26,7 @@ class UpdateRankingView:
     def dont_exist(self):
         print("\n! ERREUR ! Ce joueur n'est pas dans la base de donnée.")
         print('Veuillez recommencer.')
+        input('\nAppuyez sur une touche pour continuer...')
 
     def new_rank(self):
         print("\nQuel est le nouveau classement du joueur ?")

@@ -41,6 +41,7 @@ class UpdateRankController:
 
             if player_exist is False:
                 self.view.dont_exist()
+                return menu_c.HomeMenuController()
 
         while True:
             self.rank = self.view.new_rank()
